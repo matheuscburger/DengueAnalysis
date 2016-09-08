@@ -8,7 +8,13 @@
 - /config/sample_annotation - informação sobre as amostras
 
 # Coisas feitas
-- Criei o diretório config/sample_annotation para guardar a informação das amostras
+- Criei o diretório `config/sample_annotation` para guardar a informação das amostras
 ``` 
 mkdir -p config/sample_annotation
+```
+
+- Criei arquivo `config/studies.tsv` com o ID dos estudos
+
+- Como baixar sample_annotation:
+```
 ```
