@@ -20,4 +20,4 @@ mkdir -p config/sample_annotation
 parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotation/{}.tsv {}" ::: $(cat config/studies.tsv | cut -f 1 | sed 1d)
 ```
 
-- Adicionei manualmente as colunas Class e ExtendedClass
+- Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
