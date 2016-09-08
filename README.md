@@ -8,7 +8,16 @@
 - /config/sample_annotation - informação sobre as amostras
 
 # Coisas feitas
-- Criei o diretório config/sample_annotation para guardar a informação das amostras
+- Criei o diretório `config/sample_annotation` para guardar a informação das amostras
 ``` 
 mkdir -p config/sample_annotation
 ```
+
+- Criei arquivo `config/studies.tsv` com o ID dos estudos
+
+- Como baixar sample_annotation:
+```
+parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotation/{}.tsv {}" ::: $(cat config/studies.tsv | cut -f 1 | sed 1d)
+```
+
+- Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
