@@ -1,3 +1,4 @@
+# [Informação sobre os estudos utilizados](StudyInfo.md)
 # Estrutura de diretórios
 
 - / - Raiz do projeto
@@ -21,3 +22,5 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 ```
 
 - Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
+
+
