@@ -1,4 +1,3 @@
-
 # Estrutura de diretórios
 
 - / - Raiz do projeto
@@ -10,6 +9,6 @@
 
 # Coisas feitas
 - Criei o diretório config/sample_annotation para guardar a informação das amostras
-``` {bash}
+``` 
 mkdir -p config/sample_annotation
 ```
