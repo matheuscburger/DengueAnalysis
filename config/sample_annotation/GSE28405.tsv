@@ -1,30 +1,30 @@
 Sample_series_id	Sample_geo_accession	Sample_platform_id	Sample_supplementary_file	Sample_title	Sample_source_name_ch1	Sample_characteristics_ch1	ExtendedClass	Class	Time
-GSE28405	GSM702006	GPL2700	NONE	Control_sample  1	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702007	GPL2700	NONE	Control_sample  2	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702008	GPL2700	NONE	Control_sample  3	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702009	GPL2700	NONE	Control_sample  4	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702010	GPL2700	NONE	Control_sample  5	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702011	GPL2700	NONE	Control_sample  6	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702012	GPL2700	NONE	Control_sample  7	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702013	GPL2700	NONE	Control_sample  8	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702014	GPL2700	NONE	Control_sample  9	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702015	GPL2700	NONE	Control_sample  10	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702016	GPL2700	NONE	Control_sample  11	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702017	GPL2700	NONE	Control_sample  12	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702018	GPL2700	NONE	Control_sample  13	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702019	GPL2700	NONE	Control_sample  14	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702020	GPL2700	NONE	Control_sample  15	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702021	GPL2700	NONE	Control_sample  16	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702022	GPL2700	NONE	Control_sample  17	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702023	GPL2700	NONE	Control_sample  18	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702024	GPL2700	NONE	Control_sample  19	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702025	GPL2700	NONE	Control_sample  20	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702026	GPL2700	NONE	Control_sample  21	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702027	GPL2700	NONE	Control_sample  22	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702028	GPL2700	NONE	Control_sample  23	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702029	GPL2700	NONE	Control_sample  24	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702030	GPL2700	NONE	Control_sample  25	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
-GSE28405	GSM702031	GPL2700	NONE	Control_sample  26	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Control	Control	LessThan72Hours
+GSE28405	GSM702006	GPL2700	NONE	Control_sample  1	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702007	GPL2700	NONE	Control_sample  2	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702008	GPL2700	NONE	Control_sample  3	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702009	GPL2700	NONE	Control_sample  4	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702010	GPL2700	NONE	Control_sample  5	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702011	GPL2700	NONE	Control_sample  6	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702012	GPL2700	NONE	Control_sample  7	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702013	GPL2700	NONE	Control_sample  8	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702014	GPL2700	NONE	Control_sample  9	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702015	GPL2700	NONE	Control_sample  10	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702016	GPL2700	NONE	Control_sample  11	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702017	GPL2700	NONE	Control_sample  12	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702018	GPL2700	NONE	Control_sample  13	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702019	GPL2700	NONE	Control_sample  14	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702020	GPL2700	NONE	Control_sample  15	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702021	GPL2700	NONE	Control_sample  16	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702022	GPL2700	NONE	Control_sample  17	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702023	GPL2700	NONE	Control_sample  18	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702024	GPL2700	NONE	Control_sample  19	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702025	GPL2700	NONE	Control_sample  20	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702026	GPL2700	NONE	Control_sample  21	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702027	GPL2700	NONE	Control_sample  22	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702028	GPL2700	NONE	Control_sample  23	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702029	GPL2700	NONE	Control_sample  24	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702030	GPL2700	NONE	Control_sample  25	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
+GSE28405	GSM702031	GPL2700	NONE	Control_sample  26	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702032	GPL2700	NONE	dengue Patient_Timepoint1  1	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702033	GPL2700	NONE	dengue Patient_Timepoint1  2	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702034	GPL2700	NONE	dengue Patient_Timepoint1  3	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours

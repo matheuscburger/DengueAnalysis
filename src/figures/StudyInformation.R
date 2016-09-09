@@ -25,7 +25,7 @@ for( s in studies ){
 }
 
 # Remove plataforma GPL201
-all_df <- all_df %>% filter(Sample_platform_id != "GPL201")
+all_df <- all_df %>% filter(Sample_platform_id != "GPL201", ExtendedClass != "Febrile")
 
 # Faz pie chart para ExtendedClass
 
