@@ -79,6 +79,8 @@ get_geo <- function(geo_id, plat_id, author_dir, sup_dir, sample_annot_dir, prob
 			if(plat_id != annotation(eset)){
 				next
 			}
+		}else{
+			plat_id <- annotation(eset)
 		}
 
 		name <- paste0(geo_id, "_", annotation(eset))
