@@ -38,8 +38,8 @@
     * divide estagios em G0 - G7
     * tem scan date
 - Plataforma: 
--- [GPL201](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL201) - [HG-Focus] Affymetrix Human HG-Focus Target Array
--- [GPL570](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL570) - [HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array
+    * [GPL201](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL201) - [HG-Focus] Affymetrix Human HG-Focus Target Array
+    * [GPL570](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL570) - [HG-U133_Plus_2] Affymetrix Human Genome U133 Plus 2.0 Array
 - Artigo: [Sequential Waves of Gene Expression in Patients with Clinically Defined Dengue Illnesses Reveal Subtle Disease Phases and Predict Disease Severity](http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0002298)
 - Tipo: Infection/Timecourse??? 
 
