@@ -1,5 +1,5 @@
 .RData
 *.RData
-figures/
-data/
-log/
+./figures/
+./data/
+./log/
