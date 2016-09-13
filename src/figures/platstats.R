@@ -3,6 +3,7 @@ library("readr")
 library("dplyr")
 library("ggplot2")
 library("ggthemes")
+library("RColorBrewer")
 
 
 # Diretorio em que as figuras serao salvas
@@ -50,7 +51,7 @@ pl <- ggplot(db_count, aes(x=factor(1), y=n, fill=Database)) +
 	facet_wrap(~Platform) +
 	scale_fill_manual(values=database_colors) +
 	labs(fill="Databases", title="Number of Probes by Databases") + 
-	theme_simple
+	theme_simple + theme(text = element_text(size=20))
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "platstats", paste0("databases.", ext)), plot=pl)
 }
@@ -59,60 +60,76 @@ for(ext in c("png", "pdf", "svg")){
 ##################################################################################
 # 2) Grafico de barras mostrando números de probes em cada grupo
 
+change_colors <- function(incolors){
+	myhsv <- rgb2hsv(col2rgb(incolors))
+	myhsv["s", ] <- sapply(myhsv["s", ] + 0.8, min, 1)
+	myhsv["v", ] <- sapply(myhsv["v", ] - 0.4, max, 0)
+	res <- apply(myhsv, 2, function(x) hsv(h=x[1], s=x[2], v=x[3]))
+	return(res)
+}
 # pegar os caras que sao multi hits e multi annotations
-group_levels <- annot %>% select(Group) %>% table() %>%
+group_levels <- annot %>% filter(NumAnnot == 1 & Hits ==1) %>% select(Group) %>% table() %>%
    	sort(decreasing=TRUE) %>% names %>%
 	c("MultipleHits", "MultipleAnnotations")
+group_colors <- change_colors(brewer.pal(length(group_levels), "Set1"))
+names(group_colors) <- group_levels
+
+
 group_count <- annot %>% 
     mutate(Group=replace(Group, NumAnnot > 1, "MultipleAnnotations")) %>%
 	mutate(Group=replace(Group, Hits > 1, "MultipleHits")) %>% 
     count(Platform, Group) %>%	group_by(Platform) %>% 
-	mutate(prop=n/sum(n),
-		   Group=factor(Group, level=group_levels)) %>%
-	mutate(pos=cumsum(prop) - 0.5*prop)
+	mutate(Group=factor(Group, level=group_levels)) %>%
+	mutate(pos=0.5*n)
 
 max_n <- max(group_count[, "n"])
 
 
-pdf(file=file.path("figures", "platstats", paste0("groups.pdf")))
+pdf(file=file.path("figures", "platstats", paste0("groups.pdf")), width=10)
 for(plat in unique(group_count[["Platform"]])){
 	pl <- group_count %>% filter(Platform == plat) %>%
 		ggplot(aes(x=Group, y=n)) +
 		geom_bar(stat="identity", aes(fill=Group)) +
+	    geom_text(aes(label=n, y=pos), color="white", size=5, fontface="bold") +
 		ylim(0, max_n) +
-		scale_fill_hue(l=40) +
+		scale_fill_manual(values=group_colors) +
 		labs(y="Count", x="Group", title=plat) +
 		theme_bw() +
-		theme(axis.text.x = element_text(angle=45, hjust=1))
+		theme(axis.text.x = element_text(angle=45, hjust=1)) +
+	    theme(text = element_text(size=20))
 	print(pl)
 }
 dev.off()
 
 ##################################################################################
 # 3) Grafico de barras mostrando números de probes em cada tipo
-type_levels <- annot %>% select(Type) %>% table() %>%
+type_levels <- annot %>% filter(NumAnnot == 1 & Hits == 1 & Group == "lnoncoding") %>%
+   	select(Type) %>% table() %>%
    	sort(decreasing=TRUE) %>% names %>%
 	c("MultipleHits", "MultipleAnnotations")
+type_colors <- change_colors(brewer.pal(length(type_levels), "Set3"))
+names(type_colors) <- type_levels
 type_count <- annot %>% filter(Group == "lnoncoding") %>% 
     mutate(Type=replace(Type, NumAnnot > 1, "MultipleAnnotations")) %>%
 	mutate(Type=replace(Type, Hits > 1, "MultipleHits")) %>% 
     count(Platform, Type) %>% group_by(Platform) %>% 
-	mutate(prop=n/sum(n),
-		   Type=factor(Type, level=type_levels)) %>%
-	mutate(pos=cumsum(prop) - 0.5*prop)
+	mutate(Type=factor(Type, level=type_levels)) %>%
+	mutate(pos=0.5*n)
 
 max_n <- max(type_count[, "n"])
 
-pdf(file=file.path("figures", "platstats", paste0("types.pdf")))
+pdf(file=file.path("figures", "platstats", paste0("types.pdf")), width=10)
 for(plat in unique(group_count[["Platform"]])){
 	pl <- type_count %>% filter(Platform == plat) %>%
 		ggplot(aes(x=Type, y=n)) +
 		geom_bar(stat="identity", aes(fill=Type)) +
-		#ylim(0, max_n) +
-		scale_fill_hue(l=40) +
+		ylim(0, max_n) +
+		scale_fill_manual(values=type_colors) +
+	    geom_text(aes(label=n, y=pos), color="white", size=5, fontface="bold") +
 		labs(y="Count", x="Type", title=plat) +
 		theme_bw() +
-		theme(axis.text.x = element_text(angle=45, hjust=1))
+		theme(axis.text.x = element_text(angle=45, hjust=1)) +
+	    theme(text = element_text(size=20))
 	print(pl)
 }
 dev.off()
