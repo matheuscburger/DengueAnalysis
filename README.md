@@ -7,6 +7,14 @@
 - /src/microarrayAnalysis -  scripts do pipeline original e outros para fazer a análise de microarray
 - /config - Deve conter todas as informações necessárias para gerar todas as outras coisas
 - /config/sample_annotation - informação sobre as amostras
+- /figures - figuras da apresentação do power-point "To-do list"
+- /data - contém os dados baixados e pré-processados (não resultados)
+- /data/geo_raw - dados baixados do GEO
+- /data/geo_raw/author - matriz de expressão gênica pré-processado (ou não) pelo autor
+- /data/geo_raw/probe_annotation - anotação das probes proveniente do GEO
+- /data/geo_raw/raw_data - arquivos brutos de cada amostra como CEL files
+- /data/geo_raw/sample_annotation - arquivos de anotação
+- /data/geo_raw/supplemental_data - arquivos suplementares
 
 # Coisas feitas
 - Criei o diretório `config/sample_annotation` para guardar a informação das amostras
@@ -22,5 +30,8 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 ```
 
 - Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
+
+- script `src/getData.sh` baixa dados do GEO
+
 
 
