@@ -6,7 +6,8 @@
 - /src/figures - scripts para gerar as figuras da apresentação do power-point "To-do list"
 - /src/microarrayAnalysis -  scripts do pipeline original e outros para fazer a análise de microarray
 - /config - Deve conter todas as informações necessárias para gerar todas as outras coisas
-- /config/sample_annotation - informação sobre as amostras
+- /config/sample_annotation - informação sobre as amostras sem outliers
+- /config/sample_annotation/with_outlier - informação sobre as amostras contendo outliers
 - /figures - figuras da apresentação do power-point "To-do list"
 - /data - contém os dados baixados e pré-processados (não resultados)
 - /data/geo_raw - dados baixados do GEO
