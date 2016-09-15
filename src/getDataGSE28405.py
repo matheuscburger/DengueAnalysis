@@ -78,10 +78,10 @@ if __name__ == "__main__":
                 non_det = [n for n in non_det if header[n]]  # remove vazios
 
                 signal_header = [to_geo[header[n]] for n in non_det]
-                signal_header.insert(0, header[0])
+                signal_header.insert(0, "ProbeName")
                 signal_file.write("\t".join(signal_header)+"\n")
                 det_header = [to_geo[header[d-1]] for d in det]
-                det_header.insert(0, header[0])
+                det_header.insert(0, "ProbeName")
                 detection_file.write("\t".join(det_header)+"\n")
     detection_file.close()
     signal_file.close()
