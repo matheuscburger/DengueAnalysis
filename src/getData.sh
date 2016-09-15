@@ -18,3 +18,5 @@ GetGEO() {
 export -f GetGEO
 
 parallel -j 10 GetGEO ::: GSE43777 GSE51808 GSE13052 GSE28405
+
+src/getDataGSE28405.py data/raw_data/GSE28405_detection_pval.tsv data/raw_data/GSE28405_signal.tsv data/raw_data/GSE28405_samplename2gsm.tsv 
