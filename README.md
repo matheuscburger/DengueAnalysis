@@ -17,6 +17,9 @@
 - /data/geo_raw/sample_annotation - arquivos de anotação
 - /data/geo_raw/supplemental_data - arquivos suplementares
 - /data/raw_data - raw data que veio do GEO mas foi necessário algum parsing, descompactação, etc de arquivos
+- /quality_control - para guardar relatórios de controle de qualidade
+- /quality_control/before_norm - controle de qualitade antes de normalizar
+- /quality_control/after_norm - controle de qualitade depois de normalizar
 
 # Coisas feitas
 - Criei o diretório `config/sample_annotation` para guardar a informação das amostras
@@ -33,7 +36,12 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 
 - Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
 
-- script `src/getData.sh` baixa dados do GEO
+- script `src/getData.sh` baixa dados do GEO e já parseia os dados dos dois estudos da Illumina 
+
+- Criei o diretório /data/raw_data foi criado para colocar dados brutos porém já parseardos
+
+- Criei o diretório quality_control/before_norm e quality_control/after_norm para colocar as saídas do arrayQualityMetrics
+
 
 
 
