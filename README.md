@@ -17,9 +17,12 @@
 - /data/geo_raw/sample_annotation - arquivos de anotação
 - /data/geo_raw/supplemental_data - arquivos suplementares
 - /data/raw_data - raw data que veio do GEO mas foi necessário algum parsing, descompactação, etc de arquivos
+- /data/processed - dados processados
+- /data/processed/normalized - dados normalizados
 - /quality_control - para guardar relatórios de controle de qualidade
 - /quality_control/before_norm - controle de qualitade antes de normalizar
 - /quality_control/after_norm - controle de qualitade depois de normalizar
+
 
 # Coisas feitas
 - Criei o diretório `config/sample_annotation` para guardar a informação das amostras
@@ -42,6 +45,6 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 
 - Criei o diretório quality_control/before_norm e quality_control/after_norm para colocar as saídas do arrayQualityMetrics
 
-
+- Criei o diretório /data/processed/normalized para guardar dados normalizados
 
 
