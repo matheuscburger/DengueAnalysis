@@ -17,6 +17,12 @@
 - /data/geo_raw/sample_annotation - arquivos de anotação
 - /data/geo_raw/supplemental_data - arquivos suplementares
 - /data/raw_data - raw data que veio do GEO mas foi necessário algum parsing, descompactação, etc de arquivos
+- /data/processed - dados processados
+- /data/processed/normalized - dados normalizados
+- /quality_control - para guardar relatórios de controle de qualidade
+- /quality_control/before_norm - controle de qualitade antes de normalizar
+- /quality_control/after_norm - controle de qualitade depois de normalizar
+
 
 # Coisas feitas
 - Criei o diretório `config/sample_annotation` para guardar a informação das amostras
@@ -33,7 +39,29 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 
 - Adicionei manualmente as colunas Class, ExtendedClass e Time (caso estudo for timecourse)
 
-- script `src/getData.sh` baixa dados do GEO
+- script `src/getData.sh` baixa dados do GEO e já parseia os dados dos dois estudos da Illumina 
 
+- Criei o diretório /data/raw_data foi criado para colocar dados brutos porém já parseardos
 
+- Criei o diretório quality_control/before_norm e quality_control/after_norm para colocar as saídas do arrayQualityMetrics
 
+- Criei o diretório /data/processed/normalized para guardar dados normalizados
+
+- Como rodar `src/preprocess_Illumina.sh`?
+    1. Primeiro apague o arquivo de outliers
+```
+rm config/sample_annotation/outliers.txt
+```
+    1. Copie os arquivos com outliers
+```
+cp config/sample_annotation/with_outliers/* config/sample_annotation/
+```
+    1. Apague os arquivos de controle de qualidade
+```
+rm -fr quality_control/before_norm/*
+rm -fr quality_control/after_norm/*
+```
+    1. Rode o script
+```
+src/preprocess_Illumina.sh
+```
