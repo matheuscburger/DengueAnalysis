@@ -2,6 +2,8 @@
 *.RData
 *.pyc
 .ropeproject
+tmp/
+quality_control/
 figures/
 data/
 log/
