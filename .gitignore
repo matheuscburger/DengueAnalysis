@@ -1,5 +1,6 @@
 .RData
 *.RData
+*.pyc
 .ropeproject
 figures/
 data/
