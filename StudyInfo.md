@@ -28,9 +28,9 @@
 - ExtendedClass: DF, DHF e Convalescent
 - Class: Dengue e Control
 - Tempos: 
--- Early Acute | dias: 0, 1, 2, 3, df0, df1, df2 | estágios: G0 - G3
--- Late Acute | dias: 4, 5, 6, 7, df0, df1, df2, df3, df4 | estágios: G4 - G6
--- Convalescent | dias: c (convalescente) | estágios: G7
+    * Early Acute | dias: 0, 1, 2, 3, df0, df1, df2 | estágios: G0 - G3
+    * Late Acute | dias: 4, 5, 6, 7, df0, df1, df2, df3, df4 | estágios: G4 - G6
+    * Convalescent | dias: c (convalescente) | estágios: G7
 - Informação das amostras: 
     * Sangue, 
     * tem os 4 sorotipos, 
