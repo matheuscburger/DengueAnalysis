@@ -10,13 +10,11 @@ GSE28405	GSM702013	GPL2700	NONE	Control_sample  8	Human whole blood	sample type:
 GSE28405	GSM702014	GPL2700	NONE	Control_sample  9	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702015	GPL2700	NONE	Control_sample  10	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702016	GPL2700	NONE	Control_sample  11	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
-GSE28405	GSM702017	GPL2700	NONE	Control_sample  12	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702018	GPL2700	NONE	Control_sample  13	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702019	GPL2700	NONE	Control_sample  14	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702020	GPL2700	NONE	Control_sample  15	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702021	GPL2700	NONE	Control_sample  16	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702022	GPL2700	NONE	Control_sample  17	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
-GSE28405	GSM702023	GPL2700	NONE	Control_sample  18	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702024	GPL2700	NONE	Control_sample  19	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702025	GPL2700	NONE	Control_sample  20	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
 GSE28405	GSM702026	GPL2700	NONE	Control_sample  21	Human whole blood	sample type: Control; collection time: Less than 72 hour after symptoms	Febrile		LessThan72Hours
@@ -34,12 +32,8 @@ GSE28405	GSM702037	GPL2700	NONE	dengue Patient_Timepoint1  6	Human whole blood	s
 GSE28405	GSM702038	GPL2700	NONE	dengue Patient_Timepoint1  7	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702039	GPL2700	NONE	dengue Patient_Timepoint1  8	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702040	GPL2700	NONE	dengue Patient_Timepoint1  9	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
-GSE28405	GSM702041	GPL2700	NONE	dengue Patient_Timepoint1  10	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702042	GPL2700	NONE	dengue Patient_Timepoint1  11	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702043	GPL2700	NONE	dengue Patient_Timepoint1  12	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
-GSE28405	GSM702044	GPL2700	NONE	dengue Patient_Timepoint1  13	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
-GSE28405	GSM702045	GPL2700	NONE	dengue Patient_Timepoint1  14	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
-GSE28405	GSM702046	GPL2700	NONE	dengue Patient_Timepoint1  15	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702047	GPL2700	NONE	dengue Patient_Timepoint1  16	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702048	GPL2700	NONE	dengue Patient_Timepoint1  17	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702049	GPL2700	NONE	dengue Patient_Timepoint1  18	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
@@ -56,34 +50,28 @@ GSE28405	GSM702059	GPL2700	NONE	dengue Patient_Timepoint1  28	Human whole blood	
 GSE28405	GSM702060	GPL2700	NONE	dengue Patient_Timepoint1  29	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702061	GPL2700	NONE	dengue Patient_Timepoint1  30	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
 GSE28405	GSM702062	GPL2700	NONE	dengue Patient_Timepoint1  31	Human whole blood	sample type: Patient; collection time: Less than 72 hour after symptoms	Dengue	Dengue	LessThan72Hours
-GSE28405	GSM702063	GPL2700	NONE	dengue Patient_Timepoint2  1	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702064	GPL2700	NONE	dengue Patient_Timepoint2  2	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702065	GPL2700	NONE	dengue Patient_Timepoint2  3	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702066	GPL2700	NONE	dengue Patient_Timepoint2  4	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702067	GPL2700	NONE	dengue Patient_Timepoint2  5	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702068	GPL2700	NONE	dengue Patient_Timepoint2  6	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
-GSE28405	GSM702069	GPL2700	NONE	dengue Patient_Timepoint2  7	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702070	GPL2700	NONE	dengue Patient_Timepoint2  8	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702071	GPL2700	NONE	dengue Patient_Timepoint2  9	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702072	GPL2700	NONE	dengue Patient_Timepoint2  10	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702073	GPL2700	NONE	dengue Patient_Timepoint2  11	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702074	GPL2700	NONE	dengue Patient_Timepoint2  12	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702075	GPL2700	NONE	dengue Patient_Timepoint2  13	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
-GSE28405	GSM702076	GPL2700	NONE	dengue Patient_Timepoint2  14	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702077	GPL2700	NONE	dengue Patient_Timepoint2  15	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702078	GPL2700	NONE	dengue Patient_Timepoint2  16	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702079	GPL2700	NONE	dengue Patient_Timepoint2  17	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702080	GPL2700	NONE	dengue Patient_Timepoint2  18	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
-GSE28405	GSM702081	GPL2700	NONE	dengue Patient_Timepoint2  19	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702082	GPL2700	NONE	dengue Patient_Timepoint2  20	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702083	GPL2700	NONE	dengue Patient_Timepoint2  21	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702084	GPL2700	NONE	dengue Patient_Timepoint2  22	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
-GSE28405	GSM702085	GPL2700	NONE	dengue Patient_Timepoint2  23	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702086	GPL2700	NONE	dengue Patient_Timepoint2  24	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702087	GPL2700	NONE	dengue Patient_Timepoint2  25	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702088	GPL2700	NONE	dengue Patient_Timepoint2  26	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702089	GPL2700	NONE	dengue Patient_Timepoint2  27	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
-GSE28405	GSM702090	GPL2700	NONE	dengue Patient_Timepoint2  28	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702091	GPL2700	NONE	dengue Patient_Timepoint2  29	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702092	GPL2700	NONE	dengue Patient_Timepoint2  30	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
 GSE28405	GSM702093	GPL2700	NONE	dengue Patient_Timepoint2  31	Human whole blood	sample type: Patient; collection time: 3 to 7 dys after symptoms	Dengue	Dengue	3to7Days
@@ -95,10 +83,7 @@ GSE28405	GSM702098	GPL2700	NONE	dengue Patient_Timepoint3  5	Human whole blood	s
 GSE28405	GSM702099	GPL2700	NONE	dengue Patient_Timepoint3  6	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702100	GPL2700	NONE	dengue Patient_Timepoint3  7	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702101	GPL2700	NONE	dengue Patient_Timepoint3  8	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
-GSE28405	GSM702102	GPL2700	NONE	dengue Patient_Timepoint3  9	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
-GSE28405	GSM702103	GPL2700	NONE	dengue Patient_Timepoint3  10	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702104	GPL2700	NONE	dengue Patient_Timepoint3  11	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
-GSE28405	GSM702105	GPL2700	NONE	dengue Patient_Timepoint3  12	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702106	GPL2700	NONE	dengue Patient_Timepoint3  13	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702107	GPL2700	NONE	dengue Patient_Timepoint3  14	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
 GSE28405	GSM702108	GPL2700	NONE	dengue Patient_Timepoint3  15	Human whole blood	sample type: Patient; collection time: 2 to 5 weeks after symptoms	Convalescent	Control	2to5Weeks
