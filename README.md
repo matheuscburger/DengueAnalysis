@@ -47,4 +47,21 @@ parallel "src/microarrayAnalysis/get_sample_annot.py --out config/sample_annotat
 
 - Criei o diretório /data/processed/normalized para guardar dados normalizados
 
-
+- Como rodar `src/preprocess_Illumina.sh`?
+    1. Primeiro apague o arquivo de outliers
+```
+rm config/sample_annotation/outliers.txt
+```
+    1. Copie os arquivos com outliers
+```
+cp config/sample_annotation/with_outliers/* config/sample_annotation/
+```
+    1. Apague os arquivos de controle de qualidade
+```
+rm -fr quality_control/before_norm/*
+rm -fr quality_control/after_norm/*
+```
+    1. Rode o script
+```
+src/preprocess_Illumina.sh
+```
