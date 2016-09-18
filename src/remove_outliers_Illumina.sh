@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! $# -eq 1 ]; then
 	echo "Please give me the study id !"
 	exit 1
