@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for cdir in data/raw_data data/geo_raw/author data/geo_raw/supplemental_data data/geo_raw/raw_data data/geo_raw/sample_annotation data/geo_raw/probe_annotation; do
+for cdir in log data/raw_data data/geo_raw/author data/geo_raw/supplemental_data data/geo_raw/raw_data data/geo_raw/sample_annotation data/geo_raw/probe_annotation; do
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
