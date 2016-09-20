@@ -119,7 +119,6 @@ aqm <- function(input_exp, input_dir, input_annot, output_dir, annotation_cols=c
 		stop("Please specify input_exp or input_dir")
 	}
 
-	#save(file="aqm.RData", list=ls())
 	aqm.res <- arrayQualityMetrics(exp.obj, outdir=output_dir, intgroup=int_cols, force=T)
 
 	aqm.tbl <- aqm.res$arrayTable
@@ -150,6 +149,7 @@ if (!interactive() && !exists('SOURCE')) {
 	suppressMessages(library("affy"))
 	suppressMessages(library("jsonlite"))
 
+	#save(file="aqm.RData", list=ls())
 	do.call(aqm, parameters)
 }
 
