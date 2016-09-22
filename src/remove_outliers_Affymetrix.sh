@@ -37,7 +37,7 @@ while [ $num_outliers -gt 0 ]; do
 	# obtem outliers em pelo menos 2 metodos
 	src/microarrayAnalysis/get_outliers_from_json.py quality_control/before_norm/${study}_$count/outliers.json --count=4 > quality_control/before_norm/${study}_$count/outliers.txt 
 	cat quality_control/before_norm/${study}_$count/outliers.txt config/sample_annotation/outliers.txt > tmp/outliers.txt
-	cat tmp/outliers.txt  | sort | uniq | sed '/^\s*$/d' >> config/sample_annotation/outliers.txt
+	cat tmp/outliers.txt  | sort | uniq | sed '/^\s*$/d' > config/sample_annotation/outliers.txt
 
 	# normaliza
 	src/microarrayAnalysis/do_rma.R --sup-dir data/geo_raw/raw_data/${study}_${platform} --sample-annot config/sample_annotation/${study}.tsv --rma-file data/processed/normalized/${study}.tsv 2> log/rma_${study}_$count.txt
@@ -73,7 +73,7 @@ while [ $num_outliers -gt 0 ]; do
 	# obtem outliers em pelo menos 2 metodos
 	src/microarrayAnalysis/get_outliers_from_json.py quality_control/after_norm/${study}_$count/outliers.json --count=2 > quality_control/after_norm/${study}_$count/outliers.txt 
 	cat quality_control/after_norm/${study}_$count/outliers.txt config/sample_annotation/outliers.txt > tmp/outliers.txt
-	cat tmp/outliers.txt | sort | uniq | sed '/^\s*$/d' >> config/sample_annotation/outliers.txt
+	cat tmp/outliers.txt | sort | uniq | sed '/^\s*$/d' > config/sample_annotation/outliers.txt
 
 	# remove outliers da anotacao das amostras
 	parallel "grep -vf config/sample_annotation/outliers.txt {} > config/sample_annotation/{/}" ::: config/sample_annotation/with_outliers/GSE*.tsv
@@ -86,3 +86,5 @@ while [ $num_outliers -gt 0 ]; do
 	# atualiza contador
 	count=$((count+1))
 done
+
+echo "remove_outliers_Affymetrix done."

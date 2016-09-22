@@ -37,10 +37,10 @@ while [ $num_outliers -gt 0 ]; do
 	# obtem outliers em pelo menos 2 metodos
 	src/microarrayAnalysis/get_outliers_from_json.py quality_control/before_norm/${study}_$count/outliers.json --count=2 > quality_control/before_norm/${study}_$count/outliers.txt 
 	cat quality_control/before_norm/${study}_$count/outliers.txt config/sample_annotation/outliers.txt > tmp/outliers.txt
-	cat tmp/outliers.txt  | sort | uniq | sed '/^\s*$/d' >> config/sample_annotation/outliers.txt
+	cat tmp/outliers.txt  | sort | uniq | sed '/^\s*$/d' > config/sample_annotation/outliers.txt
 
 	# normaliza
-	src/microarrayAnalysis/do_quantile.R tmp/${study}.tsv data/processed/normalized/${study}.tsv --annotation-cols=ProbeName 2> log/quantile_${study}_$count.txt
+	src/microarrayAnalysis/do_quantile.R tmp/${study}.tsv data/processed/normalized/${study}.tsv --avoid-0 --offset=1 --annotation-cols=ProbeName 2> log/quantile_${study}_$count.txt
 
 	# arrayQualityMetrics depois de normalizar
 	src/microarrayAnalysis/aqm.R --input-exp data/processed/normalized/${study}.tsv config/sample_annotation/${study}.tsv quality_control/after_norm/${study}_$count --int-cols ExtendedClass --int-cols Class 2> log/aqm_after_norm_${study}_$count.txt
@@ -68,7 +68,7 @@ while [ $num_outliers -gt 0 ]; do
 	src/microarrayAnalysis/aqm.R --input-exp tmp/${study}.tsv config/sample_annotation/${study}.tsv quality_control/before_norm/${study}_$count --int-cols ExtendedClass --int-cols Class 2> log/aqm_before_norm_${study}_$count.txt
 
 	# normaliza
-	src/microarrayAnalysis/do_quantile.R tmp/${study}.tsv data/processed/normalized/${study}.tsv --annotation-cols=ProbeName 2> log/quantile_${study}_$count.txt
+	src/microarrayAnalysis/do_quantile.R tmp/${study}.tsv data/processed/normalized/${study}.tsv --avoid-0 --offset=1 --annotation-cols=ProbeName 2> log/quantile_${study}_$count.txt
 
 	# arrayQualityMetrics depois de normalizar
 	src/microarrayAnalysis/aqm.R --input-exp data/processed/normalized/${study}.tsv config/sample_annotation/${study}.tsv quality_control/after_norm/${study}_$count --int-cols ExtendedClass --int-cols Class 2> log/aqm_before_norm_${study}_$count.txt
@@ -76,7 +76,7 @@ while [ $num_outliers -gt 0 ]; do
 	# obtem outliers em pelo menos 2 metodos
 	src/microarrayAnalysis/get_outliers_from_json.py quality_control/after_norm/${study}_$count/outliers.json --count=2 > quality_control/after_norm/${study}_$count/outliers.txt 
 	cat quality_control/after_norm/${study}_$count/outliers.txt config/sample_annotation/outliers.txt > tmp/outliers.txt
-	cat tmp/outliers.txt | sort | uniq | sed '/^\s*$/d' >> config/sample_annotation/outliers.txt
+	cat tmp/outliers.txt | sort | uniq | sed '/^\s*$/d' > config/sample_annotation/outliers.txt
 
 	# remove outliers da anotacao das amostras
 	parallel "grep -vf config/sample_annotation/outliers.txt {} > config/sample_annotation/{/}" ::: config/sample_annotation/with_outliers/GSE*.tsv
@@ -91,3 +91,5 @@ while [ $num_outliers -gt 0 ]; do
 	# atualiza contador
 	count=$((count+1))
 done
+
+echo "remove_outliers_Illumina done."
