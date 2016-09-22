@@ -1,0 +1,6 @@
+title	test	control	pair
+Dengue vs Convalescent	(ExtendedClass, 'Dengue')	(ExtendedClass, 'Convalescent')	
+Dengue vs Febrile	(ExtendedClass, 'Dengue')	(ExtendedClass, 'Febrile')	
+Dengue vs Control	(Class, 'Dengue')	(Class, 'Control')	
+EarlyDengue vs Control	(Class, 'Dengue') AND (Stage, 'Early')	(Class, 'Control')	
+LateDengue vs Control	(Class, 'Dengue') AND (Stage, 'Late')	(Class, 'Control')	

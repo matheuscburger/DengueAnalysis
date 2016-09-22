@@ -1,0 +1,8 @@
+title	test	control	pair
+DHF vs Convalescent	(ExtendedClass, 'DHF')	(ExtendedClass, 'Convalescent')	
+DF vs Convalescent	(ExtendedClass, 'DF')	(ExtendedClass, 'Convalescent')	
+DHF vs DF	(ExtendedClass, 'DHF')	(ExtendedClass, 'DF')	
+Dengue vs Control	(Class, 'Dengue')	(Class, 'Control')	
+Dengue vs Convalescent	(Class, 'Dengue')	(ExtendedClass, 'Convalescent')	
+EarlyDengue vs Control	(Class, 'Dengue') AND (Stage, 'Early')	(Class, 'Control')	
+LateDengue vs Control	(Class, 'Dengue') AND (Stage, 'Late')	(Class, 'Control')	
