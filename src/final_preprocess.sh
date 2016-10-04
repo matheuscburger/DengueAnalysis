@@ -31,14 +31,14 @@ src/microarrayAnalysis/annotate_probes.R data/processed/normalized/GSE43777.tsv 
 echo "Annotating GSE51808 ..."
 src/microarrayAnalysis/annotate_probes.R data/processed/normalized/GSE51808.tsv data/processed/annotated/GSE51808.tsv --annotation-file=tmp/reannotation_GPL570.tsv
 
-# Collapse
-echo "Collapsing ... "
-parallel -j 10 "src/microarrayAnalysis/collapse.R {} data/processed/collapsed/{/} --by-col=Symbol --method=maxmean --annotation-cols=ProbeName" ::: data/processed/annotated/GSE*.tsv
+## Collapse
+#echo "Collapsing ... "
+#parallel -j 10 "src/microarrayAnalysis/collapse.R {} data/processed/collapsed/{/} --by-col=Symbol --method=maxmean --annotation-cols=ProbeName" ::: data/processed/annotated/GSE*.tsv
 
 # Filter
 echo "Filtering ..."
 
-parallel -j 10 "src/microarrayAnalysis/filter.R {} data/processed/filtered/{/} --method=mean --prop=0.8 --annotation-cols=Symbol" ::: data/processed/collapsed/GSE*.tsv
+parallel -j 10 "src/microarrayAnalysis/filter.R {} data/processed/filtered/{/} --method=mean --prop=0.8 --annotation-cols ProbeName --annotation-cols=Symbol" ::: data/processed/annotated/GSE*.tsv
 
 
 echo "Done."

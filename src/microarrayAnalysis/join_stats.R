@@ -73,6 +73,10 @@ join.stats <- function(filenames, maintain.cols, key.cols, probe.col){
         fa <- fread(fn)
         message("First 6 rows in ", fn, " ...")
         write.table(head(fa), file=stderr(), sep="\t", quote=FALSE, row.names=F)
+		# remove _PM do probename
+		if(!missing(probe.col)){
+			fa[[probe.col]] <- sub("_PM", "", fa[[probe.col]])
+		}
 		# keep only columns that will be used
         fa <- fa[, union(maintain.cols, key.cols), with=FALSE]
 		# get the positions of columns that should be maintained
