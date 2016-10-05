@@ -4,7 +4,6 @@
 .ropeproject
 tmp/
 quality_control/
-figures/
 data/
 log/
 results/
