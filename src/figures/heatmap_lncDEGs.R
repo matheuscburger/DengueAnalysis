@@ -51,8 +51,8 @@ rb <- colorRampPalette(c(rgb(0,0,1), rgb(1, 1, 1), rgb(1,0,0)), alpha = TRUE)(10
 my.hclust <- function(x) hclust(x, method="ward.D2")
 dist.euclidean <- function(x) dist(x, method="euclidean")
 
-pdf("figures/heatmap_lncDEGs/allstudies.pdf")
 for( i in 1:4 ){
+	pdf(paste0("figures/heatmap_lncDEGs/", studies[i], ".pdf"))
 	curr.exps <- exps.lncs[[i]]
 	curr.sannot <- sannot[[i]]
 	curr.samples <- curr.sannot[["Sample_geo_accession"]]
@@ -80,5 +80,5 @@ for( i in 1:4 ){
 					   dendrogram=list(clustfun=my.hclust, distfun=dist.euclidean),
 					   legend=T)
 	plot(heat)
+	dev.off()
 }
-dev.off()
