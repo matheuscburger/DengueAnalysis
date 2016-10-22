@@ -2,7 +2,7 @@
 
 "Calculate correlation between lncRNAs and conding genes
 
-Usage: cor_lnc.R --ovlp=<file> --exp=<file> --output=<file> --method=<value> --lnc-col=<value> --coding-col=<value> --symbol-col=<value> --probe-col=<value> --correction=<method> [--annotation-cols=<value>...]
+Usage: cor_lnc.R --ovlp=<file> --exp=<file> --output=<file> [--method=<value> --lnc-col=<value> --coding-col=<value> --symbol-col=<value> --probe-col=<value> --correction=<method> --annotation-cols=<value>...]
 
 Options:
   -h --help                   show this help message
