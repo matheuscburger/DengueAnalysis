@@ -31,7 +31,7 @@ drop.cols <- function(in.df, cols){
 	if(length(rm.cols) > 0){
 		return(in.df[, -rm.cols])
 	}
-	return(in.df[, -rm.cols])
+	return(in.df)
 }
 
 maxmean <- function(x){
@@ -46,9 +46,18 @@ colMedian <- function(x){
 	apply(x, 2, median)
 }
 
-collapse <- function(in.df, method, by_col){
-	tmp.df <- drop.cols(in.df, by_col)
-	res <- tapply(1:nrow(in.df), in.df[, by_col], function(x){
+collapse <- function(in.df, method, by_col, drop=T){
+	if(drop){
+		tmp.df <- drop.cols(in.df, by_col)
+	} else {
+		tmp.df <- in.df
+	}
+	if(length(by_col) > 1){ 
+		by_vals <- apply(in.df[, by_col], 1, paste, collapse="_")
+	} else {
+		 by_vals <- in.df[, by_col]
+	}
+	res <- tapply(1:nrow(in.df), by_vals, function(x){
 		sub.df <- tmp.df[x, ]
 		method(sub.df)
 	})	
@@ -56,9 +65,7 @@ collapse <- function(in.df, method, by_col){
 }
 
 main_collapse <- function(input, output, method=c("maxmean", "minmean", "colMeans", "colMedian"), annotation_cols=c("ProbeName"), by_col){
-	method <- match.arg(method)
 	in.df <- read.delim(input)
-	save(file="collapse.RData", list=ls())
 	maintain.col <- which(annotation_cols %in% by_col)
 	if(length(maintain.col) > 0){
 		annotation_cols <- annotation_cols[-maintain.col]

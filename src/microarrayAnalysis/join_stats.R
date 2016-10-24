@@ -58,7 +58,10 @@ mc.apply <- function(in.df, fun, n.cores, ...){
 
 
 # Join tables with statistics
-join.stats <- function(filenames, maintain.cols, key.cols, probe.col){
+join.stats <- function(filenames, maintain.cols, key.cols, probe.col, comp.col){
+	if(missing(comp.col)){
+		comp.col <- c()
+	}
     # extract basename without extension
     bnames <- str_match(basename(filenames), "(\\S+)\\.\\S+")[,2]
     names(bnames) <- filenames	
@@ -75,7 +78,9 @@ join.stats <- function(filenames, maintain.cols, key.cols, probe.col){
         write.table(head(fa), file=stderr(), sep="\t", quote=FALSE, row.names=F)
 		# remove _PM do probename
 		if(!missing(probe.col)){
-			fa[[probe.col]] <- sub("_PM", "", fa[[probe.col]])
+			for(p in probe.col){
+				fa[[p]] <- sub("_PM", "", fa[[p]])
+			}
 		}
 		# keep only columns that will be used
         fa <- fa[, union(maintain.cols, key.cols), with=FALSE]
@@ -139,6 +144,7 @@ combine.stats <- function(in.df, pv.col, padj.col, lfc.col, n.cores){
     return(res)
 }
 
+print(exists("SOURCE"))
 
 if (!interactive() && !exists('SOURCE')) {
 	# Get and check arguments.
@@ -185,7 +191,7 @@ if (!interactive() && !exists('SOURCE')) {
 	suppressMessages(library("parallel"))
 
 	joined <- join.stats(filenames=filenames, maintain.cols=maintain.cols, 
-						 key.cols=key.cols, probe.col=probe.col)
+						 key.cols=key.cols, probe.col=probe.col, comp.col=comp.col)
 	res <- combine.stats(joined, pv.col=pv.col, padj.col=padj.col, 
 						 lfc.col=lfc.col, n.cores=n.cores)
 	write.table(res, arg[["output"]], quote=FALSE, sep="\t", row.names=FALSE)
