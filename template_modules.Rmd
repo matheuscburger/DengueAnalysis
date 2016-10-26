@@ -13,7 +13,7 @@ output:
 \fontfamily{phv}
 \fontsize{12}{22}
 \selectfont
-\ULCornerWallPaper{1}{/home/prusso/GitHub/csbl/wgcna/csblLogo.png} 
+\ULCornerWallPaper{1}{csblLogo.png} 
 
 \ 
  

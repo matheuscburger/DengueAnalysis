@@ -929,8 +929,8 @@ doFastGSEA <- function(exp.gsea, template.df, GS, ranks = F){
                           maxSize=500,
                           nperm=10000,
                           nproc=1)
-        
-        lead.edge <- fgseaRes[,leadingEdge]
+        message("Colunas no FGSEA: ", paste(colnames(fgseaRes)))
+        lead.edge <- fgseaRes[["leadingEdge"]]
         lead.edge <- lapply(lead.edge, function(x){ 
             x <- paste(x, collapse=",")
         })
@@ -1494,3 +1494,4 @@ system(paste0("pdftk A=", name_out, "_params.pdf"," B=", modules.pdf, " C=", gow
 
 if(verbose) message("Finished CEMiTool")
 #load(file="saves.RData") 
+print(sessionInfo())
