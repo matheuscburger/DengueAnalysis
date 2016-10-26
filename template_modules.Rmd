@@ -1,0 +1,40 @@
+---
+fontsize: 10pt
+header-includes: 
+    \usepackage{wallpaper} 
+output:
+  pdf_document:
+      latex_engine: pdflatex
+      keep_tex: True
+  documentclass: minimal
+  html_document: default
+---
+\pagenumbering{gobble}
+\fontfamily{phv}
+\fontsize{12}{22}
+\selectfont
+\ULCornerWallPaper{1}{/home/prusso/GitHub/csbl/wgcna/csblLogo.png} 
+
+\ 
+ 
+\ 
+ 
+\ 
+
+\ 
+
+\ 
+**CEMiTool Report for Job `r name_out`**
+\begin{center}
+Parameters used in this analysis
+\end{center}
+
+
+
+```{r echo=FALSE, warning=FALSE}
+library("knitr")
+kable(results.table)
+```
+
+
+
