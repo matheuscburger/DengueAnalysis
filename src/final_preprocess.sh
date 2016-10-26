@@ -40,5 +40,9 @@ echo "Filtering ..."
 
 parallel -j 10 "src/microarrayAnalysis/filter.R {} data/processed/filtered/{/} --method=mean --prop=0.8 --annotation-cols ProbeName --annotation-cols=Symbol" ::: data/processed/annotated/GSE*.tsv
 
+# Collapse
+echo "Collapsing ..."
+
+parallel -j 10 "src/microarrayAnalysis/collapse.R {} data/processed/collapsed/{/} --by-col=Symbol --method=maxmean --annotation-cols=ProbeName --annotation-cols=Symbol" ::: data/processed/filtered/GSE*.tsv
 
 echo "Done."
