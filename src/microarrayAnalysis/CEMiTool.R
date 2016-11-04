@@ -315,7 +315,7 @@ goWGCNA <- function(data, file_name, corr.method = "spearman"){
         mergedMEs <- moduleMerge$newMEs
         
         # Create pdf output for merged modules
-        file_out <- paste("merged_", unlist(strsplit(file_name, ".txt")), "_", phi, "_", st[2], sep = "")
+        file_out <- paste(unlist(strsplit(file_name, ".txt")), "_", phi, "_", st[2], "_merged", sep = "")
         pdf(file = paste0(file_out, ".pdf"),onefile=TRUE)
         ## Plot beta x R2
         plot(powers, fit, type = "n", xlab = "Soft Threshold Beta", 
@@ -929,7 +929,6 @@ doFastGSEA <- function(exp.gsea, template.df, GS, ranks = F){
                           maxSize=500,
                           nperm=10000,
                           nproc=1)
-        message("Colunas no FGSEA: ", paste(colnames(fgseaRes)))
         lead.edge <- fgseaRes[["leadingEdge"]]
         lead.edge <- lapply(lead.edge, function(x){ 
             x <- paste(x, collapse=",")
@@ -1485,7 +1484,8 @@ write.table(analysis.res, file = paste(name_out, "_analysis_res.txt", sep = ""),
 
 #write.table(parameters, file = paste(name_out, "_params.txt", sep = ""), sep = "\t", row.names = F, quote = FALSE)
 
-render(file.path(base.path, "template_modules.Rmd"), envir = globalenv(), output_file = paste0(name_out, "_params.pdf"), output_dir = getwd())
+render(file.path(base.path, "template_modules.Rmd"), envir = globalenv(), output_file = paste0(basename(name_out), "_params.pdf"), output_dir = file.path(getwd(), dirnames(name_out)))
+
 
 #save(file="saves.RData", list=ls())
 
@@ -1494,4 +1494,3 @@ system(paste0("pdftk A=", name_out, "_params.pdf"," B=", modules.pdf, " C=", gow
 
 if(verbose) message("Finished CEMiTool")
 #load(file="saves.RData") 
-print(sessionInfo())
