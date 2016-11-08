@@ -6,8 +6,8 @@ library("biomaRt")
 
 in_args <- commandArgs(trailingOnly=TRUE)
 input_fname <- in_args[1]
-output_dir <- dirname(input_fname)
-gene_col <- in_args[2]
+output_dir <- in_args[2]
+gene_col <- in_args[3]
 
 # input_fname <- "/home/mburger/repository/DengueAnalysis/data/processed/CEMiTool_input/GSE28405.tsv"
 # output_dir <- "/home/mburger/repository/DengueAnalysis/data/processed/CEMiTool_input/"
