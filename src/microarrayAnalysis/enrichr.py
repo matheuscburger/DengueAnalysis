@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim:fileencoding=utf8
 
-"""Remove columns from a table (TSV)
+"""Enrichr
 
 Usage:
   enrichr.py --input=<file> --output=<file> (--gs=<geneset>...)
@@ -22,6 +22,8 @@ __license__ = "GPL"
 import json
 import requests
 from docopt import docopt
+import time
+import sys
 
 def getResultsFile(output, genesets, userlistid,
                    enrichr_url="http://amp.pharm.mssm.edu/",
@@ -31,7 +33,16 @@ def getResultsFile(output, genesets, userlistid,
         for gs in genesets:
             url = enrichr_url + query_string % \
                 (userlistid, output, gs)
-            response = requests.get(url, stream=True)
+            success = False
+            while not success:
+                try:
+                    response = requests.get(url, stream=True)
+                    success = True
+                except requests.exceptions.RequestException as e:
+                    print(e, file=sys.stderr)
+                    print("Sleep(1) ...", file=sys.stderr)
+                    time.sleep(1)
+                    print("Next loop ...", file=sys.stderr)
             lines = response.text.strip("\n").split("\n")
             header = "GeneSet\t"+lines.pop(0)
             if not flagHeader:
