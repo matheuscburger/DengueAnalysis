@@ -145,7 +145,6 @@ if (!interactive() && !exists('SOURCE')) {
 	clean <- function(s) gsub('-', '_', gsub('^-+', '', tolower(s)))
 	names(arg) <- clean(names(arg))
 
-    print(arg)
 	# convert to numeric
 	for(n in c("pv_cut", "padj_cut", "lfc_cut")){
 		arg[[n]] <- as.numeric(arg[[n]])
