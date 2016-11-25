@@ -65,7 +65,7 @@ volc_plot <- function(stats, log2fc_col, lfc_cut, pv_col, pv_cut,
 	pl <- stats %>% group_by(title) %>%
 		do(
 		   plots=ggplot(., aes_string(x=log2fc_col, y=paste0("-log10(",p_chosen,")"))) + 
-			   geom_point(aes(color=Direction), alpha=0.5) +
+			   geom_point(aes(color=Direction), alpha=0.5, size=3) +
 				   geom_vline(xintercept=lfc_cut, color="#616161", linetype="dashed") +
 				   geom_vline(xintercept=-lfc_cut, color="#616161", linetype="dashed") +
 				   geom_hline(yintercept=-log10(cut_chosen), color="#616161", linetype="dashed") + theme_minimal() +
@@ -74,8 +74,9 @@ volc_plot <- function(stats, log2fc_col, lfc_cut, pv_col, pv_cut,
 				   geom_text(data=. %>% count(Direction) %>%
 							 filter(Direction != "Not Sig.") %>%
 							 mutate(x=ifelse(Direction=="Down-regulated", -Inf, Inf)),
-						 aes(label=n, x=x, color=Direction), y=Inf, vjust=2, hjust="inward", size=6, show.legend=F) +
-		   			theme(legend.position="top")
+						 aes(label=n, x=x, color=Direction), y=Inf, vjust=2, hjust="inward", size=10, show.legend=F) +
+		   			theme(legend.position="top") +
+					theme(text=element_text(size=20))
 				   )
 	if(!missing(x_lim)){
 		pl[["plots"]] <- lapply(pl[["plots"]], `+` , scale_x_continuous(limits=x_lim, oob=squish))
