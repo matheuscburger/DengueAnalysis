@@ -24,6 +24,10 @@ input <- input %>% left_join(gsymbols, by=by_vector)
 res <- input[["hgnc_symbol"]]
 res[which(is.na(res) | res == "")] <- input[which(is.na(res) | res == ""), ][["external_gene_name"]]
 res[which(is.na(res) | res == "")] <- input[which(is.na(res) | res == ""), ][[gene_col]]
+tbl <- table(res)
+for(i in names(tbl)[tbl != 1]) {
+	res[which(res == i)] <- paste(res[which(res == i)], c("", seq(2, tbl[i])), sep="_")
+}
 write_tsv(cbind(input[, c(gene_col, "hgnc_symbol", "external_gene_name")], final_name=res), 
 		  file.path(output_dir, "gene_conversion", paste0(basename(input_fname))))
 input[[gene_col]] <- res
