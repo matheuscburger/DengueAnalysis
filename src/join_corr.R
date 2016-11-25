@@ -42,7 +42,7 @@ for(f in c(filesGPL570, filesGPL2700)){
 	collapse_cor(f, res_fname, by_col=key.cols)
 }
 
-joined <- as.data.frame(join.stats(by_genes_files, maintain.cols=maintain.cols, 
+joined <- as.data.frame(join.stats(by_genes_files, maintain.cols=c(maintain.cols, probe.col), 
 				  key.cols=key.cols))
 
 
