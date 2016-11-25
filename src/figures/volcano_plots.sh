@@ -9,4 +9,4 @@ for cdir in figures/volcano_plots; do
 	fi
 done
 
-parallel -j 4 "src/microarrayAnalysis/volcano_plots.R --input {} --output figures/volcano_plots/{/.} --y-min=0 --y-max=10 --x-min=-4 --x-max=4" ::: results/DEG/*.tsv
+parallel -j 4 "src/microarrayAnalysis/volcano_plots.R --input {} --output figures/volcano_plots/{/.}.pdf --y-min=0 --y-max=10 --x-min=-4 --x-max=4" ::: results/DEG/*.tsv
