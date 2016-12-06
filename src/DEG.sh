@@ -11,7 +11,7 @@ for cdir in results/DEG; do
 done
 
 echo "Obtendo DEGs ... "
-parallel -j 10 "src/microarrayAnalysis/do_comparisons.R --comp-file {} --norm-file data/processed/filtered/{/} --stat results/DEG/{/} --sample-annot config/sample_annotation/{/} --annotation-cols ProbeName --annotation-cols Symbol 2> log/do_comparisons_{/.}.txt " ::: config/comparisons/GSE*.tsv
+parallel -j 10 "src/microarrayAnalysis/do_comparisons.R --comp-file {} --norm-file data/processed/filtered/{/} --stat results/DEG/{/} --sample-annot config/sample_annotation/{/} --annotation-cols ProbeName --annotation-cols Symbol 1>&2 2> log/degs/do_comparisons_{/.}.txt " ::: config/comparisons/GSE*.tsv
 
 #echo "Juntando lista de DEGs ..."
 #DEG_files=$(for i in results/DEG/GSE*.tsv; do echo "--input $i"; done | tr "\n" " ")
@@ -22,3 +22,7 @@ src/microarrayAnalysis/join_stats.R results/GPL570_joined_DEG.tsv --probe-col Pr
 
 # Junta as duas plataformas
 R CMD BATCH src/cutDEGs.R
+
+mv cutDEGs.Rout log/degs/
+
+echo "DEG.sh done."

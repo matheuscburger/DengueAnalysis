@@ -11,7 +11,9 @@ for cdir in results/correlation/bygene results/correlation/byprobe; do
 done
 
 # Calcula correlacao
-parallel -j 4 "src/microarrayAnalysis/cor_lnc.R --ovlp config/reannotation/ovlp_lnc.tsv --exp {} --output results/correlation/byprobe/{/} --method spearman 2> log/correlation_{/.}.txt" ::: data/processed/filtered/GSE*.tsv
+parallel -j 4 "src/microarrayAnalysis/cor_lnc.R --ovlp config/reannotation/ovlp_lnc.tsv --exp {} --output results/correlation/byprobe/{/} --method spearman 2> log/correlation/correlation_{/.}.txt" ::: data/processed/filtered/GSE*.tsv
 
 # Junta correlacao dos 4 estudos
 R CMD BATCH src/join_corr.R 
+
+echo "corr.sh Done."

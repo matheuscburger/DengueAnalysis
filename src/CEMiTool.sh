@@ -47,4 +47,4 @@ parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_FGSEA_input/ S
 echo "Running FGSEA ..."
 parallel -j 10 "src/microarrayAnalysis/fgsea.R --expression {} --es results/CEMiTool_joined/fgsea/ES_{/} --nes results/CEMiTool_joined/fgsea/NES_{/} --pval results/CEMiTool_joined/fgsea/p_value_{/} --gmt results/CEMiTool_joined_modules.gmt --sample-annotation config/sample_annotation/{/} --annotation-cols Symbol --symbols Symbol --sample-name-col Sample_geo_accession --class-col Class" ::: data/processed/CEMiTool_FGSEA_input/annotated/GSE*.tsv
 
-echo "Done."
+echo "CEMiTool.sh Done."

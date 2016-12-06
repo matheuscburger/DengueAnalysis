@@ -78,7 +78,7 @@ do.ora.list <- function(topgenes, gmt.list, allgenes, ...){
 do.ora.stats <- function(stat_df, gmt.list, pv_cut, padj_cut, lfc_cut, gene_col, comp_col, lfc_col, pv_col, padj_col, ...){
 
 
-	comparisons <- stat_df %>% select(get(comp_col)) %>% unique %>% unlist
+	comparisons <- stat_df %>% dplyr::select(get(comp_col)) %>% unique %>% unlist
 	all.comp <- data.frame()
 
 	for(cmp in comparisons){

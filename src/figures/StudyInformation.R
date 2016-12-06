@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Fazer um gráfico de pizz com as classes das amostras em cada estudo (coluna ExtendedClass e Class)
 
 options(stringsAsFactors=FALSE)
@@ -21,7 +23,7 @@ studies <- c("GSE13052", "GSE28405", "GSE43777", "GSE51808")
 all_df <- data.frame()
 for( s in studies ){
 	s_df <- read_tsv(file.path(sa_dir, paste0(s, ".tsv")))
-	all_df <- s_df %>% select(Sample_series_id, Sample_platform_id, Sample_geo_accession, ExtendedClass, Class) %>% rbind(all_df)
+	all_df <- s_df %>% dplyr::select(Sample_series_id, Sample_platform_id, Sample_geo_accession, ExtendedClass, Class) %>% rbind(all_df)
 }
 
 # Remove plataforma GPL201

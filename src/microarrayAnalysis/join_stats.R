@@ -125,19 +125,19 @@ combine.stats <- function(in.df, pv.col, padj.col, lfc.col, n.cores){
     #system.time(mc.mps <- mc.apply(ps, get_metap, 10))
 	res <- in.df
 	if(!missing(pv.col)){
-		ps <- res %>% select(starts_with(pv.col)) %>%
+		ps <- res %>% dplyr::select(starts_with(pv.col)) %>%
 			mc.apply(get_metap, n.cores)
 		colnames(ps) <- paste0("rawp.", colnames(ps))
 		res <- cbind(res, ps)
 	}
 	if(!missing(padj.col)){
-		adjps <- res %>% select(starts_with(padj.col)) %>%
+		adjps <- res %>% dplyr::select(starts_with(padj.col)) %>%
 			mc.apply(get_metap, n.cores)
 		colnames(adjps) <- paste0("adjp.", colnames(adjps))
 		res <- cbind(res, adjps)
 	}
 	if(!missing(lfc.col)){
-		lfc <- res %>% select(starts_with(lfc.col))
+		lfc <- res %>% dplyr::select(starts_with(lfc.col))
 		res$mean.lfc <- mc.apply(lfc, function(x) mean(x, na.rm=T), n.cores=n.cores)
 		res$min.lfc <- mc.apply(lfc, function(x) x[which.min(abs(x))], n.cores=n.cores)
 	}

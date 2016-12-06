@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 
 # Carregar bibliotecas
 library("readr")
@@ -23,7 +23,7 @@ lnc.tbl <- degs %>%
 	filter(Group == "lnoncoding")
 lncs <- unique(lnc.tbl[['Symbol']])
 
-comps <- lnc.tbl %>% select(Symbol, title) %>% 
+comps <- lnc.tbl %>% dplyr::select(Symbol, title) %>% 
 	spread(key=title, value=title)
 inds <- which(!is.na(comps[, 2:ncol(comps)]), arr.ind=T)
 inds[,2] <- inds[,2] + 1
@@ -58,7 +58,7 @@ for( i in 1:4 ){
 	curr.samples <- curr.sannot[["Sample_geo_accession"]]
 	curr.comps <- full_join(curr.exps[, c("ProbeName", "Symbol")], comps) %>%
 		slice(match(curr.exps[["ProbeName"]], ProbeName)) %>% 
-		select(-ProbeName, -Symbol) %>% apply(2, as.logical)
+		dplyr::select(-ProbeName, -Symbol) %>% apply(2, as.logical)
 
 
 	scaled <- t(apply(curr.exps[, curr.samples], 1, scale))

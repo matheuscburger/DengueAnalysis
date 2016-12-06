@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 
 library("readr")
 library("dplyr")
@@ -15,7 +16,7 @@ annot <- read_tsv("config/reannotation/annotation_long.tsv")
 # 1) Grafico de pizzas mostrando numero de probes por database em cada plataforma
 
 # Pega informacao de databases por plataforma
-db_levels <- annot %>% select(Database) %>% table() %>% sort(decreasing=TRUE) %>% names
+db_levels <- annot %>% dplyr::select(Database) %>% table() %>% sort(decreasing=TRUE) %>% names
 db_count <- annot %>% count(Platform, Database) %>% 
 	group_by(Platform) %>% 
 	mutate(prop=n/sum(n),
@@ -68,7 +69,7 @@ change_colors <- function(incolors){
 	return(res)
 }
 # pegar os caras que sao multi hits e multi annotations
-group_levels <- annot %>% filter(NumAnnot == 1 & Hits ==1) %>% select(Group) %>% table() %>%
+group_levels <- annot %>% filter(NumAnnot == 1 & Hits ==1) %>% dplyr::select(Group) %>% table() %>%
    	sort(decreasing=TRUE) %>% names %>%
 	c("MultipleHits", "MultipleAnnotations")
 group_colors <- change_colors(brewer.pal(length(group_levels), "Set1"))
@@ -104,7 +105,7 @@ dev.off()
 ##################################################################################
 # 3) Grafico de barras mostrando números de probes em cada tipo
 type_levels <- annot %>% filter(NumAnnot == 1 & Hits == 1 & Group == "lnoncoding") %>%
-   	select(Type) %>% table() %>%
+   	dplyr::select(Type) %>% table() %>%
    	sort(decreasing=TRUE) %>% names %>%
 	c("MultipleHits", "MultipleAnnotations")
 type_colors <- change_colors(brewer.pal(length(type_levels), "Set3"))

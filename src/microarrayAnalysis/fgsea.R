@@ -148,7 +148,7 @@ if (!interactive() && !exists('SOURCE')) {
 		filter_(paste0("!is.na(", arg$symbols,")"))
 
 	exp.df <- exp.tibble %>% 
-		select_(.dots=paste0("-", arg$annotation_cols)) %>%
+		dplyr::select_(.dots=paste0("-", arg$annotation_cols)) %>%
 			as.data.frame
 	rownames(exp.df) <- exp.tibble[[arg$symbols]]
 

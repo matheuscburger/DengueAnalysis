@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 SOURCE <- TRUE
 source("src/microarrayAnalysis/join_stats.R")
 source("src/microarrayAnalysis/collapse.R")

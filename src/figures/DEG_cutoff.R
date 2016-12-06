@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 
 library("readr")
 library("dplyr")
@@ -11,7 +12,7 @@ dir.create(file.path("figures", "DEG_cutoff"))
 
 # le anotacao
 reannotation <- read_tsv("config/reannotation/annotation_long.tsv") %>% 
-	select(Database, Gene, Type, Group) %>% unique
+	dplyr::select(Database, Gene, Type, Group) %>% unique
 
 # le estatisticas
 gpl570 <- read_tsv("results/GPL570_joined_DEG.tsv", guess_max=100000)
@@ -50,38 +51,38 @@ is_discordant <- function(x){
 message("O dataset GPL2700 possui ", nrow(gpl2700), " linhas")
 sub_gpl2700 <- gpl2700 %>% filter(!HasNAs) %>% # remove linhas que possuem NAs devido a filtro 
 	# Seleciona colunas de interesse
-	select(title, ProbeName, Symbol, starts_with("Log2FC"), starts_with("LIMMA.rawp"), starts_with("LIMMA.adjp")) %>% 
+	dplyr::select(title, ProbeName, Symbol, starts_with("Log2FC"), starts_with("LIMMA.rawp"), starts_with("LIMMA.adjp")) %>% 
 	left_join(reannotation, by=c("Symbol" = "Gene")) # Adiciona informacoes da reanotacao
 message("O dataset GPL2700 possui ", nrow(sub_gpl2700), " linhas apos remocao de NAs")
 # verifica fold-changes discordantes
-sub_gpl2700[, "Discordant"] <- select(sub_gpl2700, starts_with("Log2FC.GSE")) %>% apply(1, is_discordant)
+sub_gpl2700[, "Discordant"] <- dplyr::select(sub_gpl2700, starts_with("Log2FC.GSE")) %>% apply(1, is_discordant)
 # verifica menor fold-change
-sub_gpl2700[, "min_fc"] <- select(sub_gpl2700, starts_with("Log2FC.GSE")) %>% 
+sub_gpl2700[, "min_fc"] <- dplyr::select(sub_gpl2700, starts_with("Log2FC.GSE")) %>% 
 	apply(1, function(x) {min(abs(x), na.rm=T)})
 # verifica maior p-valor
-sub_gpl2700[, "max_p"] <- select(sub_gpl2700, starts_with("LIMMA.rawp")) %>% 
+sub_gpl2700[, "max_p"] <- dplyr::select(sub_gpl2700, starts_with("LIMMA.rawp")) %>% 
 	apply(1, function(x) {max(abs(x), na.rm=T)})
 # verifica maior p-valor ajustado
-sub_gpl2700[, "max_adjp"] <- select(sub_gpl2700, starts_with("LIMMA.adjp")) %>% 
+sub_gpl2700[, "max_adjp"] <- dplyr::select(sub_gpl2700, starts_with("LIMMA.adjp")) %>% 
 	apply(1, function(x) {max(abs(x), na.rm=T)})
 
 # GPL570
 message("O dataset GPL570 possui ", nrow(gpl570), " linhas")
 sub_gpl570 <- gpl570 %>% filter(!HasNAs) %>%
-	select(title, ProbeName, Symbol, starts_with("Log2FC"), starts_with("LIMMA.rawp"), starts_with("LIMMA.adjp")) %>% 
+	dplyr::select(title, ProbeName, Symbol, starts_with("Log2FC"), starts_with("LIMMA.rawp"), starts_with("LIMMA.adjp")) %>% 
 	left_join(reannotation, by=c("Symbol" = "Gene"))
 message("O dataset GPL570 possui ", nrow(sub_gpl570), " linhas apos remocao de NAs")
-sub_gpl570[, "Discordant"] <- select(sub_gpl570, starts_with("Log2FC.GSE")) %>% apply(1, is_discordant)
-sub_gpl570[, "min_fc"] <- select(sub_gpl570, starts_with("Log2FC.GSE")) %>% 
+sub_gpl570[, "Discordant"] <- dplyr::select(sub_gpl570, starts_with("Log2FC.GSE")) %>% apply(1, is_discordant)
+sub_gpl570[, "min_fc"] <- dplyr::select(sub_gpl570, starts_with("Log2FC.GSE")) %>% 
 	apply(1, function(x) {min(abs(x), na.rm=T)})
-sub_gpl570[, "max_p"] <- select(sub_gpl570, starts_with("LIMMA.rawp")) %>% 
+sub_gpl570[, "max_p"] <- dplyr::select(sub_gpl570, starts_with("LIMMA.rawp")) %>% 
 	apply(1, function(x) {max(abs(x), na.rm=T)})
-sub_gpl570[, "max_adjp"] <- select(sub_gpl570, starts_with("LIMMA.adjp")) %>% 
+sub_gpl570[, "max_adjp"] <- dplyr::select(sub_gpl570, starts_with("LIMMA.adjp")) %>% 
 	apply(1, function(x) {max(abs(x), na.rm=T)})
 
 # pega range de FCs
-all_fc <- c(sub_gpl570 %>% select(starts_with("Log2FC")) %>% unlist %>% as.numeric, 
-			sub_gpl2700 %>% select(starts_with("Log2FC")) %>% unlist %>% as.numeric)
+all_fc <- c(sub_gpl570 %>% dplyr::select(starts_with("Log2FC")) %>% unlist %>% as.numeric, 
+			sub_gpl2700 %>% dplyr::select(starts_with("Log2FC")) %>% unlist %>% as.numeric)
 max_fc <- max(abs(all_fc), na.rm=T)
 
 # funcao para pegar tamanho da interseccao

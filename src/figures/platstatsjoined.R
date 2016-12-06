@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 
 library("readr")
 library("dplyr")
@@ -14,7 +15,7 @@ annot <- read_tsv("config/reannotation/annotation_long.tsv")
 # todas as plataformas
 counts <- annot %>% filter(Hits == 1 & NumAnnot == 1) %>% 
 	#filter(Platform %in% platforms) %>% 
-    select(Platform, Gene, Type, Group, Database) %>%
+    dplyr::select(Platform, Gene, Type, Group, Database) %>%
     unique() %>%
 	count(Gene, Type, Group, Database) %>%
 	mutate(Plats=n) %>% 
@@ -39,7 +40,7 @@ for(ext in c("png", "pdf", "svg")){
 platforms <- c("GPL570", "GPL2700")
 counts <- annot %>% filter(Hits == 1 & NumAnnot == 1) %>% 
 	filter(Platform %in% platforms) %>% 
-    select(Platform, Gene, Type, Group, Database) %>%
+    dplyr::select(Platform, Gene, Type, Group, Database) %>%
     unique() %>%
 	count(Gene, Type, Group, Database) %>%
 	mutate(Plats=n) %>% 
