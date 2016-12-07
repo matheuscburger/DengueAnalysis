@@ -11,13 +11,13 @@ for cdir in results/CEMiTool data/processed/CEMiTool_input/annotated data/proces
 done
 
 # filter using Gustavo's script
-parallel -j 10 "src/microarrayAnalysis/genefilter.R --expr-file {} --output {/} --outdir data/processed/CEMiTool_input/filtered --method V --pvalue 0.3 > log/genefilter_{/.}.txt" ::: data/processed/collapsed/*.tsv
+parallel -j 10 "src/microarrayAnalysis/genefilter.R --expr-file {} --output {/} --outdir data/processed/CEMiTool_input/filtered --method V --pvalue 0.3 > log/cemitool/genefilter_{/.}.txt" ::: data/processed/collapsed/*.tsv
 
 # prepare input for CEMiTool
 parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_input/ Symbol" ::: data/processed/CEMiTool_input/filtered/GSE*.tsv
 
 #run CEMiTool
-parallel -j 1 "src/microarrayAnalysis/CEMiTool.R  {} -o results/CEMiTool/{/.}_CEMiTool -s config/pathways/BTM.gmt -t config/sample_annotation/{/.}.tsv --gene-column Symbol --samples-column Sample_geo_accession -c spearman -n 1000 > log/CEMiTool_{/.}.txt 2> log/CEMiTool_{/.}.txt" :::  data/processed/CEMiTool_input/annotated/*.tsv
+parallel -j 1 "src/microarrayAnalysis/CEMiTool.R  {} -o results/CEMiTool/{/.}_CEMiTool -s config/pathways/BTM.gmt -t config/sample_annotation/{/.}.tsv --gene-column Symbol --samples-column Sample_geo_accession -c spearman -n 1000 2> log/cemitool/CEMiTool_{/.}.txt 1>&2" :::  data/processed/CEMiTool_input/annotated/*.tsv
 
 echo  "Joining cemitool results ..."
 src/microarrayAnalysis/integrateCemitResult.R --output results/CEMiTool_joined.tsv results/CEMiTool/*_GenesInModules.txt
