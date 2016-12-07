@@ -19,7 +19,7 @@ done
 
 if [ "$outliers" = Y ]; then
 	echo "Removing outliers.txt file ..."
-	rm outliers.txt
+	rm config/sample_annotation/outliers.txt
 	echo "Copying sample annotation files including outlier samples ..."
 	cp config/sample_annotation/with_outliers/* config/sample_annotation/
 fi
