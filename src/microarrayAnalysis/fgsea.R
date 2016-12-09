@@ -2,7 +2,7 @@
 
 "FGSEA of mean Z-score
 
-Usage: fgsea.R --expression=<file> --es=<file> --nes=<file> --pval=<file> --gmt=<file> --sample-annotation=<file> --annotation-cols=<value> --symbols=<value> --sample-name-col=<value> --class-col=<value> [--annotation-cols=<value>...]
+Usage: fgsea.R --expression=<file> --es=<file> --nes=<file> --pval=<file> --gmt=<file> --sample-annotation=<file> --symbols=<value> --sample-name-col=<value> --class-col=<value> [--annotation-cols=<value>...]
 
 Options:
   -h --help                  show this help message
@@ -53,6 +53,7 @@ doFastGSEA <- function(exp.gsea, template.df, GS, ranks = F, class_col){ # from 
 	exp.gsea <- exp.gsea[, rownames(Temp)]
     
     Zexp.gsea <- data.frame(t(scale(t(exp.gsea), center=TRUE, scale=TRUE))) # transforma em tabela d Z-scores
+	gsea.coco <- list()
     
     gseaList <- list()
 	
@@ -67,18 +68,28 @@ doFastGSEA <- function(exp.gsea, template.df, GS, ranks = F, class_col){ # from 
         
         if(ranks){
             geneList <- rank(apply(exp.gsea[, class_samples], 1, mean))
+			gsea.coco[[curr_class]] <- geneList
             geneList <- sort(geneList, decreasing = T)
         }else{
             geneList <- apply(Zexp.gsea[, class_samples], 1, mean)
+			gsea.coco[[curr_class]] <- geneList
             geneList <- sort(geneList, decreasing = T)
         }
+
+		register(SerialParam())
+		bpparameters <- bpparam() 
+		message("bpparam()")
+		message(str(bpparameters))
         
+		message("Running FGSEA")
         fgseaRes <- fgsea(pathways = GS, 
                           stats = geneList,
                           minSize=15,
                           maxSize=500,
                           nperm=10000,
-                          nproc=1)
+                          nproc=0,
+						  )
+		message("FGSEA ok")
         lead.edge <- fgseaRes[["leadingEdge"]]
         lead.edge <- lapply(lead.edge, function(x){ 
             x <- paste(x, collapse=",")
@@ -113,6 +124,7 @@ doFastGSEA <- function(exp.gsea, template.df, GS, ranks = F, class_col){ # from 
     #write.table(nes.combined, file=paste0(name_out, "_Enrichment_NES.txt"), sep="\t", row.names = F)
     gsea.res <- list(es.combined, pval.combined, nes.combined)
     names(gsea.res) <- c("ES", "padj", "NES")
+	write.table(do.call(cbind, gsea.coco), "Zexp.gsea.tsv", sep="\t", quote=FALSE)
 	message("Function doFastGSEA done.")
     return(gsea.res)
 }    
@@ -121,6 +133,7 @@ suppressMessages(library('fgsea'))
 suppressMessages(library('dplyr'))
 suppressMessages(library('readr'))
 suppressMessages(library('data.table'))
+suppressMessages(library('BiocParallel'))
 
 if (!interactive() && !exists('SOURCE')) {
 	# Get and check arguments.
@@ -143,24 +156,34 @@ if (!interactive() && !exists('SOURCE')) {
 	#arg$nes_file <- "tmp/coco_nes.tsv"
 	#arg$pval_file <- "tmp/coco_pval.tsv"
 
-
+	message("Reading TSV ...")
 	exp.tibble <- read_tsv(arg$expression) %>%
 		filter_(paste0("!is.na(", arg$symbols,")"))
 
-	exp.df <- exp.tibble %>% 
-		dplyr::select_(.dots=paste0("-", arg$annotation_cols)) %>%
-			as.data.frame
+	if("annotation_cols" %in% names(arg)){
+		message("Removing annotation columns ...")
+		exp.tibble <- exp.tibble %>% 
+			dplyr::select_(.dots=paste0("-", arg$annotation_cols))
+	}
+	message("Converting to data.frame...")
+	exp.df <- as.data.frame(exp.tibble)
 	rownames(exp.df) <- exp.tibble[[arg$symbols]]
 
+	message("Reading Sample annotation ...")
 	annot.df <- as.data.frame(read_tsv(arg$sample_annotation))
 	rownames(annot.df) <- annot.df[[arg$sample_name_col]]
 
+	message("Reading GMT files ...")
 	gmt <- read.gmt(arg$gmt)
 	geneset <- gmt[["genes"]]
 
+	message("Running doFastGSEA ...")
 	res <- doFastGSEA(exp.df, annot.df, geneset, class_col=arg$class_col)
 
+	message("Writing ES TSV ...")
 	write_tsv(res[["ES"]], arg$es)
+	message("Writing NES TSV ...")
 	write_tsv(res[["NES"]], arg$nes)
+	message("Writing padj TSV ...")
 	write_tsv(res[["padj"]], arg$pval)
 }
