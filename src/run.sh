@@ -26,7 +26,7 @@ fi
 
 
 echo $(date +%d-%m-%Y:%H:%M:%S) " Getting data ..."
-src/getData.sh &> log/getdata/getData.sh
+src/getData.sh &> log/getdata/getData.log
 
 echo $(date +%d-%m-%Y:%H:%M:%S) "Preprocessing data ..."
 src/preprocess.sh &> log/preprocess/preprocess.log
