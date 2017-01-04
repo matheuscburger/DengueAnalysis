@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for cdir in log/preprocess log/getdata log/degs log/correlation log/cemitool log/enrichment log/figures; do
+for cdir in log/preprocess log/getdata log/degs log/correlation log/cemitool log/enrichment log/figures log/gsea; do
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
@@ -37,6 +37,9 @@ src/DEG.sh &> log/degs/DEG.log
 echo $(date +%d-%m-%Y:%H:%M:%S) "Running over representation analysis ..."
 src/enrichment.sh &> log/enrichment/enrichment.log
 
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running gene set enrichment analysis ..."
+src/gsea.sh &> log/gsea/gsea.log
+
 echo $(date +%d-%m-%Y:%H:%M:%S) "Running correlation analysis ..."
 src/corr.sh &> log/correlation/corr.log
 
@@ -50,4 +53,4 @@ for script in src/figures/*; do
 	$script &> log/figures/$base.log
 done
 
-echo "Done."
+echo $(date +%d-%m-%Y:%H:%M:%S) "Done."
