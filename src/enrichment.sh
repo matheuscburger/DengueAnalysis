@@ -1,6 +1,17 @@
 #!/bin/bash
 
-for cdir in results/joined_degs/enrichment/do_ora results/joined_degs/enrichment/enrichr results/joined_degs/genes; do
+for cdir in results/enrichment/do_ora results/enrichment/enrichr results/joined_degs/genes tmp/joined_degs; do
+	echo "Creating $cdir ..."
+	if [ -d $cdir ]; then
+		echo "$cdir already exists !"
+	else
+		mkdir -p $cdir
+		echo "$cdir created !"
+	fi
+done
+for database in config/pathways/*.gmt; do
+	db=$(basename $database .gmt)
+	cdir=results/enrichment/do_ora/$db
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
@@ -22,13 +33,17 @@ csvgrep -t -i -c HasDiscordantDEGs -m "TRUE" results/joined_DEG.tsv |  # get onl
 
 parallel "sort {} | uniq > results/joined_degs/genes/{/}" ::: tmp/joined_degs/*.txt
 
-echo "Running do_ora for the BTMs ..."
-parallel -j 20 "src/microarrayAnalysis/do_ora.R results/joined_degs/enrichment/do_ora/BTM_{/.}.tsv --genes {} --gmt config/pathways/BTM.gmt" ::: results/joined_degs/genes/*.txt
+for database in config/pathways/*.gmt; do
+    db=$(basename $database .gmt)
+	echo "Running do_ora for the BTMs ..."
+	parallel -j 20 "src/microarrayAnalysis/do_ora.R results/enrichment/do_ora/$db/{/.}.tsv --genes {} --gmt config/pathways/BTM.gmt" ::: results/joined_degs/genes/*.txt
+done
+
 
 echo "Getting all genesets in enrichr ..."
 genesets=$(cat config/libraries_enrichr.txt | sed "s/^/--gs=/" | tr "\n" " ")
 
 echo "Running enrichr ..."
-parallel -j 20 "src/microarrayAnalysis/enrichr.py --input {} --output results/joined_degs/enrichment/enrichr/{/.}.tsv $genesets" ::: results/joined_degs/genes/*.txt
+parallel -j 20 "src/microarrayAnalysis/enrichr.py --input {} --output results/enrichment/enrichr/{/.}.tsv $genesets" ::: results/joined_degs/genes/*.txt
 
 echo "Done."
