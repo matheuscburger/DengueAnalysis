@@ -65,7 +65,7 @@ getDEGs <- function(x, padj_cut=1, p_cut=1, lfc_cut=0){
 	res_mat[which(filter_up, arr.ind=T)] <- "Up-regulated"
 	res_mat[which(filter_down, arr.ind=T)] <- "Down-regulated"
 
-	res <- x %>% select(title, ProbeName, Symbol) %>% bind_cols(data.frame(res_mat))
+	res <- x %>% dplyr::select(title, ProbeName, Symbol) %>% bind_cols(data.frame(res_mat))
 	return(res) 
 }
 
@@ -127,7 +127,7 @@ degs %>% filter(Ratio >= 0.6, !HasDiscordantDEGs) %>%
 # Anotar tabela de degs
 # le anotacao
 reannotation <- read_tsv("config/reannotation/annotation_long.tsv") %>% 
-	select(Database, Gene, Type, Group) %>% unique
+	dplyr::select(Database, Gene, Type, Group) %>% unique
 degs <- degs %>% left_join(reannotation, by=c("Symbol" = "Gene"))
 
 # Stats by group
