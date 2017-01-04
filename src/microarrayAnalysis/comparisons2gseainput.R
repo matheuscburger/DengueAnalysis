@@ -47,7 +47,7 @@ if (!interactive() && !exists('SOURCE')) {
 	comparison_column <- arg$comparison_col
 
 	wide <- stats.df %>% 
-		select_(gene_column, comparison_column, stats_column) %>% # select columns of interest
+		dplyr::select_(gene_column, comparison_column, stats_column) %>% # select columns of interest
 		.[!is.na(.[[gene_column]]), ] %>%  # remove NAs
 		group_by_(gene_column, comparison_column) %>%
 		filter_(paste0("abs(", stats_column, ") == max(abs(", stats_column,"))")) %>% 
