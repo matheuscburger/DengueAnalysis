@@ -32,7 +32,6 @@ parallel -j 10 "src/microarrayAnalysis/group_mean.R --expr-file {} --group-file 
 
 for database in config/pathways/*.gmt; do
     db=$(basename $database .gmt)
-    # parallel --progress -j 10 "mkdir -p results/fgsea/{/.}/$db; src/microarrayAnalysis/fgsea.R --expression {} --es results/fgsea/{/.}/$db/es.tsv --nes results/fgsea/{/.}/$db/nes.tsv --pval results/fgsea/{/.}/$db/pval.tsv --gmt config/pathways/ReactomePathways.gmt --sample-annotation config/sample_annotation/{/} --symbols external_gene_name --sample-name-col Sample_geo_accession --class-col Class" ::: tmp/fgsea/colapsed/*.tsv
     parallel --progress -j 10 "src/microarrayAnalysis/fgsea.R --input {} --output results/fgsea/Log2FC/$db/{/} --gmt $database --symbols hgnc_symbol" ::: tmp/fgsea/Log2FC/*.tsv
     parallel --progress -j 10 "src/microarrayAnalysis/fgsea.R --input {} --output results/fgsea/MeanZScore/$db/{/} --gmt $database --symbols external_gene_name" ::: tmp/fgsea/meanzscore/*.tsv
 
