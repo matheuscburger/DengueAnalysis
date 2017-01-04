@@ -58,7 +58,7 @@ run_fgsea <- function(input_gsea, genesets, symbols_col){
 
 	gene_symbols <- input_gsea[[symbols_col]]
 
-	input_gsea <- input_gsea %>% select_(paste0("-",symbols_col))
+	input_gsea <- input_gsea %>% dplyr::select_(paste0("-",symbols_col))
 
 	scores <- input_gsea %>% lapply(., onesample_fgsea, gene_symbols)
 	for(n in names(scores)){
