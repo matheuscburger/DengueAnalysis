@@ -37,8 +37,8 @@ suppressMessages(library("dplyr"))
 get_mat <- function(tib, suffix, pathway_col){
 	minus_pathway_col <- paste0("-", pathway_col) 
     res <- tib %>% 
-	    select_(minus_pathway_col) %>%
-		select(ends_with(suffix)) %>%
+	    dplyr::select_(minus_pathway_col) %>%
+		dplyr::select(ends_with(suffix)) %>%
 		as.matrix
 	rownames(res) <- tib[[pathway_col]]
 	colnames(res) <- sub(suffix, "", colnames(res))
