@@ -35,7 +35,7 @@ corr.uniq <- corr.filtered %>% group_by(mrn_id, lnc_id) %>%
 	ungroup()
 
 aux <-  corr.uniq %>%
-	select(starts_with("correlation")) %>% as.matrix
+	dplyr::select(starts_with("correlation")) %>% as.matrix
 
 rownames(aux) <- apply(corr.uniq[, c("mrn_id", "lnc_id")], 1, paste0, collapse="_")
 #		select(selected, mrn_id, lnc_id, int_type)
@@ -62,17 +62,17 @@ for(i in 1:nrow(corr.uniq)){
 	rank.plots <- list()
 	scatter.plots <- list()
 	for(s in studies){
-		classes <- samp_annot_list[[s]] %>% select(Sample_geo_accession, Class)
+		classes <- samp_annot_list[[s]] %>% dplyr::select(Sample_geo_accession, Class)
 		lnc.probename <- corr.uniq[[paste0("ProbeName_lnc.", s)]][i]
 		mrna.probename <- corr.uniq[[paste0("ProbeName_mrn.", s)]][i]
 		corr_value <- corr.uniq[[paste0("correlation.", s)]][i]
 		lnc <- exp_list[[s]] %>% 
 			filter(ProbeName == lnc.probename) %>% 
-			select(-Symbol, -ProbeName) %>% 
+			dplyr::select(-Symbol, -ProbeName) %>% 
 			gather("Sample", "lncRNA") 
 		mrna <- exp_list[[s]] %>% 
 			filter(ProbeName == mrna.probename) %>% 
-			select(-Symbol, -ProbeName) %>% 
+			dplyr::select(-Symbol, -ProbeName) %>% 
 			gather("Sample", "mRNA")
 		exp_curr <- inner_join(lnc, mrna, by=c("Sample"="Sample")) %>%
 			left_join(classes, by=c("Sample"="Sample_geo_accession"))
