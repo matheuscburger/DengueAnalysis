@@ -12,7 +12,7 @@ done
 
 
 echo "Pre processing GSE43777 ... "
-src/remove_outliers_Affymetrix.sh GSE43777 GPL570 2>&1 > log/remove_outliers_Affymetrix_GSE43777.txt
+src/remove_outliers_Affymetrix.sh GSE43777 GPL570 2>&1 > log/preprocess/remove_outliers_Affymetrix_GSE43777.txt
 echo "Pre processing GSE51808 ... "
-src/remove_outliers_Affymetrix.sh GSE51808 GPL13158 2>&1 > log/remove_outliers_Affymetrix_GSE51808.txt
+src/remove_outliers_Affymetrix.sh GSE51808 GPL13158 2>&1 > log/preprocess/remove_outliers_Affymetrix_GSE51808.txt
 echo "preprocess_Affymetrix done."
