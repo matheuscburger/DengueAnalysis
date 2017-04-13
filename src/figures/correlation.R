@@ -14,12 +14,16 @@ loadfonts(device="pdf")
 dir.create(file.path("figures", "correlation", "scatter_plots"))
 dir.create(file.path("figures", "correlation", "scatter_plots_ranks"))
 
+# load correlations
 corr <- read_tsv("results/correlation/all.tsv")
 
+# filtered table
 (corr.filtered <- corr %>% 
  	filter(abs(min.cor) > 0.25 & max.adj.p < 0.1))
 
 
+# auxiliar function to discover the position of lncRNA in relation to mRNA
+# preference: overlap > upstream > downstream
 aux_fun <- function(x){
 	if("overlap" %in% x) {
 		return("overlap")
@@ -43,18 +47,18 @@ pdf("figures/correlation/corr_heatmap.pdf")
 heatmap.2(aux, trace="none", col=bluered, margins=c(9, 20))
 dev.off()
 
-# Ler arquivos de expressao
+# Read expression files
 studies <- unique(str_extract(colnames(corr.uniq), "GSE\\d+"))
 studies <- studies[!is.na(studies)]
 exp_list <- lapply(file.path("data/processed/filtered", paste0(studies, ".tsv")), read_tsv)
 names(exp_list) <- studies
 
-# Ler Sample annotations 
+# read Sample annotations 
 samp_annot_list <- lapply(file.path("config/sample_annotation/", paste0(studies, ".tsv")), read_tsv)
 names(samp_annot_list) <- studies
 
 
-# Fazer graficos
+# make plots
 for(i in 1:nrow(corr.uniq)){
 	lnc.name <- corr.uniq[["lnc_id"]][i]
 	mrna.name <- corr.uniq[["mrn_id"]][i] 
