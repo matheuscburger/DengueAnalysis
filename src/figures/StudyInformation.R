@@ -38,6 +38,7 @@ sum_info_extclass <- all_df %>% count(Sample_series_id, ExtendedClass) %>%
 	group_by(Sample_series_id) %>% 
 	mutate(prop=n/sum(n), 
 		   ExtendedClass = factor(ExtendedClass, levels=extendedClass_levels)) %>%
+    arrange(Sample_series_id, desc(ExtendedClass)) %>%
 	mutate(pos=cumsum(prop) - 0.5*prop)
 
 theme_simple <- theme_minimal() +
@@ -73,6 +74,7 @@ pl <- ggplot(sum_info_extclass, aes(x=factor(1), y=n, fill=ExtendedClass)) +
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "StudyInformation", paste0("extended_class.", ext)), plot=pl, width=10, height=3)
 }
+write_tsv(sum_info_extclass, file.path("figures", "StudyInformation", "extended_class.sum_info_extclass.tsv"))
 
 
 # Faz pie chart para Class
@@ -83,6 +85,7 @@ sum_info_class <- all_df %>% count(Sample_series_id, Class) %>%
 	group_by(Sample_series_id) %>% 
 	mutate(prop=n/sum(n), 
 		   Class = factor(Class, levels=class_levels)) %>%
+    arrange(Sample_series_id, desc(Class)) %>%
 	mutate(pos=cumsum(prop) - 0.5*prop)
 
 # faz grafico
@@ -96,3 +99,4 @@ pl <- ggplot(sum_info_class, aes(x=factor(1), y=n, fill=Class)) +
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "StudyInformation", paste0("class.", ext)), plot=pl, width=10, height=3)
 }
+write_tsv(sum_info_extclass, file.path("figures", "StudyInformation", "class.sum_info_class.tsv"))

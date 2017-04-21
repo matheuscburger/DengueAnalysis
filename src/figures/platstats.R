@@ -21,6 +21,7 @@ db_count <- annot %>% count(Platform, Database) %>%
 	group_by(Platform) %>% 
 	mutate(prop=n/sum(n),
 		   Database=factor(Database, level=db_levels)) %>%
+    arrange(Platform, desc(Database)) %>%
 	mutate(pos=cumsum(prop) - 0.5*prop)
 
 # simplifica tema para grafico
@@ -40,6 +41,7 @@ theme_simple <- theme_minimal() +
 
 # Faz grafico
 
+
 database_colors <- c("gencode"="#E59C00",
 					 "noncode"="#00A85E",
 					 "lncipedia"="#8712B5",
@@ -56,6 +58,7 @@ pl <- ggplot(db_count, aes(x=factor(1), y=n, fill=Database)) +
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "platstats", paste0("databases.", ext)), plot=pl)
 }
+write_tsv(db_count, file.path("figures", "platstats", paste0("databases.db_count.tsv")))
 
 
 ##################################################################################
@@ -101,6 +104,7 @@ for(plat in unique(group_count[["Platform"]])){
 	print(pl)
 }
 dev.off()
+write_tsv(group_count, file.path("figures", "platstats", "groups.group_count.tsv"))
 
 ##################################################################################
 # 3) Grafico de barras mostrando números de probes em cada tipo
@@ -134,3 +138,5 @@ for(plat in unique(group_count[["Platform"]])){
 	print(pl)
 }
 dev.off()
+
+write_tsv(type_count, file.path("figures", "platstats", "types.type_count.tsv"))

@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 
 library("dplyr")
 library("tidyr")
@@ -46,6 +46,8 @@ rownames(aux) <- apply(corr.uniq[, c("mrn_id", "lnc_id")], 1, paste0, collapse="
 pdf("figures/correlation/corr_heatmap.pdf")
 heatmap.2(aux, trace="none", col=bluered, margins=c(9, 20))
 dev.off()
+write.table(aux, file.path("figures", "correlation", "corr_heatmap.aux.tsv"),
+            sep="\t", quote=FALSE, col.names=NA) 
 
 # Read expression files
 studies <- unique(str_extract(colnames(corr.uniq), "GSE\\d+"))
@@ -57,6 +59,7 @@ names(exp_list) <- studies
 samp_annot_list <- lapply(file.path("config/sample_annotation/", paste0(studies, ".tsv")), read_tsv)
 names(samp_annot_list) <- studies
 
+dir.create(file.path("figures", "correlation", "scatter_plots_data"))
 
 # make plots
 for(i in 1:nrow(corr.uniq)){
@@ -96,16 +99,19 @@ for(i in 1:nrow(corr.uniq)){
 			scale_color_manual(values=c("Dengue"="#9F2110", "Control"="#164D9F")) +
 			annotate("text", x=Inf, y=-Inf, label=paste("Spearman Correlation = ", round(corr_value, digits=3)), 
 					  hjust=1.1, vjust=-1, size=6, family="DejaVu Sans") +
-			labs(title=s, x=paste0("rank(", lnc.probename, ")"), y=paste0("rank(", mrna.probename, ")")) +
+			labs(title=s, x=paste0(lnc.probename), y=paste0(mrna.probename)) +
 			theme_bw() +
 			theme(text=element_text(size=15, family="DejaVu Sans"))
 		scatter.plots[[s]] <- pl
+        write_tsv(exp_curr, file.path("figures", "correlation", 
+                                      "scatter_plots_data", 
+                                      paste0(s, "_", mrna.name, "_", lnc.name, ".tsv")))
 	}
 	pdf(file.path("figures", "correlation", "scatter_plots_ranks", paste0(name, ".pdf")))
 	.null <- sapply(rank.plots, print)
 	dev.off()
 	pdf(file.path("figures", "correlation", "scatter_plots", paste0(name, ".pdf")))
-	.null <- sapply(rank.plots, print)
+	.null <- sapply(scatter.plots, print)
 	dev.off()
 
 }

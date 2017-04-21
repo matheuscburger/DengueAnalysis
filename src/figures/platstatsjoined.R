@@ -40,6 +40,7 @@ pl <- counts %>% filter(Group %in% c("coding", "lnoncoding")) %>%
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "platstatsjoined", paste0("all_plats.", ext)), plot=pl)
 }
+write_tsv(counts, file.path("figures", "platstatsjoined", "all_plats.counts.tsv"))
 
 # minhas plataformas
 platforms <- c("GPL570", "GPL2700")
@@ -68,6 +69,7 @@ pl <- counts %>% filter(Group %in% c("coding", "lnoncoding")) %>%
 for(ext in c("png", "pdf", "svg")){
 	ggsave(filename=file.path("figures", "platstatsjoined", paste0("my_plats.", ext)), plot=pl)
 }
+write_tsv(counts, file.path("figures", "platstatsjoined", "my_plats.counts.tsv"))
 
 ## Venn diagram
 

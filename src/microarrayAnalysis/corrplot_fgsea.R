@@ -67,7 +67,7 @@ print_corrplot <- function(gsea_results, corr_colors, nes_suffix, pval_suffix, p
 
 	# define height
 	# 52 modules for a height=7 is a good ratio
-	height <- max(7, nrow(nes)*7/52)
+	height <- max(7, nrow(nes)*7/52) + 1
 
 	# define cl.ratio
 	clr <- (-0.07*height + 4.89)/44
