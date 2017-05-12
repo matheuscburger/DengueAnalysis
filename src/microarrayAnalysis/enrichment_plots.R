@@ -95,7 +95,10 @@ if (!interactive() && !exists('SOURCE')) {
 	if(!is.null(arg$title)){
 		in_df[, "GeneSet"] <- arg$title
 		arg$database_col <- "GeneSet"
-	} 
+	} else {
+		in_df[, "GeneSet"] <- ""
+		arg$database_col <- "GeneSet"
+    } 
 
 	pl <- in_df %>% group_by_(arg$database_col) %>% 
 		do(

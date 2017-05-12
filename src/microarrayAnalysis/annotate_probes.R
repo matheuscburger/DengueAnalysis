@@ -77,7 +77,6 @@ annotate <- function(exp_df, annot_env, probe_col="row.names", remove_pms=TRUE, 
 		pnames <- sub("_PM_", "_", pnames)
 	}
 
-	save(file="annot.RData", list=ls())
 	symbols <- mget(pnames, annot_env, ifnotfound=NA)
 	ssymbols <- sapply(symbols, get(multiple))
 	exp_df <- cbind(Symbol=ssymbols, exp_df)
