@@ -1,0 +1,12 @@
+config/reannotation/ovlp_lnc.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/*_pme_TPM/GSE*.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/genes_pme_TPM/GSE52166.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/genes_pme_TPM/GSE69597.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/genes_pme_TPM/GSE72509.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/genes_pme_TPM/GSE79970.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/genes_pme_TPM/GSE87186.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/isoforms_pme_TPM/GSE52166.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/isoforms_pme_TPM/GSE69597.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/isoforms_pme_TPM/GSE79970.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/isoforms_pme_TPM/GSE72509.tsv filter=lfs diff=lfs merge=lfs -text
+config/rnaseq_data/isoforms_pme_TPM/GSE87186.tsv filter=lfs diff=lfs merge=lfs -text
