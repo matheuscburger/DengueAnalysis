@@ -17,11 +17,11 @@ CEMITOOL=$(Rscript -e "cat(system.file('exec/CEMiTool.R',package='CEMiTool'))")
 ##parallel -j 10 "src/microarrayAnalysis/genefilter.R --expr-file {} --output {/} --outdir data/processed/CEMiTool_input/filtered --method V --pvalue 0.3 > log/cemitool/genefilter_{/.}.txt" ::: data/processed/collapsed/*.tsv
 
 # prepare input for CEMiTool
-parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_input/ Symbol" ::: data/processed/collapsed/GSE*.tsv
+# parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_input/ Symbol" ::: data/processed/collapsed/GSE*.tsv
 
 ##run CEMiTool
 
-parallel -j 1 "$CEMITOOL  {} -o results/CEMiTool/{/.}_CEMiTool --gmtfile config/pathways/BTM.gmt --sample-annot config/sample_annotation/{/.}.tsv --gene-column Symbol --samples-column Sample_geo_accession --correlation pearson --dontsplit --dontfilter  2> log/cemitool/CEMiTool_{/.}.txt 1>&2" :::  data/processed/CEMiTool_input/annotated/*.tsv
+parallel -j 1 "$CEMITOOL {} --output=results/CEMiTool/{/.}_CEMiTool --sample-annot config/sample_annotation/{/.}.tsv --gene-column Symbol --samples-column Sample_geo_accession --correlation pearson --class-column=Class 2> log/cemitool/CEMiTool_{/.}.txt 1>&2" :::  data/processed/collapsed/GSE*.tsv
 
 #echo  "Joining cemitool results ..."
 #src/microarrayAnalysis/integrateCemitResult.R --output results/CEMiTool_joined.tsv results/CEMiTool/*_GenesInModules.txt
