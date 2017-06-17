@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #for cdir in results/CEMiTool data/processed/CEMiTool_input/annotated data/processed/CEMiTool_input/gene_conversion data/processed/CEMiTool_input/filtered data/processed/CEMiTool_FGSEA_input/gene_conversion data/processed/CEMiTool_FGSEA_input/annotated tmp/modules results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/enrichment/do_ora results/CEMiTool_joined/fgsea/ tmp/with_symbols; do
-for cdir in results/CEMiTool; do
+for cdir in results/CEMiTool tmp/modules tmp/modules_biomart/ results/CEMiTool_joined/enrichment/do_ora/ results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/fgsea figures/enrichment_cemitool_modules/fgsea/; do
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
@@ -13,42 +13,45 @@ done
 
 CEMITOOL=$(Rscript -e "cat(system.file('exec/CEMiTool.R',package='CEMiTool'))")
 
-## filter using Gustavo's script
-##parallel -j 10 "src/microarrayAnalysis/genefilter.R --expr-file {} --output {/} --outdir data/processed/CEMiTool_input/filtered --method V --pvalue 0.3 > log/cemitool/genefilter_{/.}.txt" ::: data/processed/collapsed/*.tsv
-
-# prepare input for CEMiTool
-# parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_input/ Symbol" ::: data/processed/collapsed/GSE*.tsv
-
-##run CEMiTool
-
+#run CEMiTool
 parallel -j 1 "$CEMITOOL {} --output=results/CEMiTool/{/.}_CEMiTool --sample-annot config/sample_annotation/{/.}.tsv --gene-column Symbol --samples-column Sample_geo_accession --correlation pearson --class-column=Class 2> log/cemitool/CEMiTool_{/.}.txt 1>&2" :::  data/processed/collapsed/GSE*.tsv
 
-#echo  "Joining cemitool results ..."
-#src/microarrayAnalysis/integrateCemitResult.R --output results/CEMiTool_joined.tsv results/CEMiTool/*_GenesInModules.txt
-#
-#echo "Getting connected components in joined cemitool results ..."
-#src/microarrayAnalysis/get_modules.py --input results/CEMiTool_joined.tsv --from-col G1 --to-col G2 --filter-col sumOfPairs --filter-val 3 --output results/CEMiTool_joined_modules.txt
-#
-#echo "Generating a GMT file based on connected components ..."
-#cat  results/CEMiTool_joined_modules.txt | awk '{ print "Mod"NR"\t\t"$0 }' > results/CEMiTool_joined_modules.gmt
-#
-#echo "Putting each module in one file ..."
-#parallel 'echo {} | tr "\t" "\n" > tmp/modules/mod{#}.txt' :::: results/CEMiTool_joined_modules.txt
-#
-#
-#echo "Running do_ora for the BTMs ..."
-#parallel -j 20 "src/microarrayAnalysis/do_ora.R results/CEMiTool_joined/enrichment/do_ora/BTM_{/.}.tsv --genes {} --gmt config/pathways/BTM.gmt" ::: tmp/modules/*.txt
-#
-#echo "Getting all genesets in enrichr ..."
-#genesets=$(cat config/libraries_enrichr.txt | sed "s/^/--gs=/" | tr "\n" " ")
-#
-#echo "Running enrichr ..."
-#parallel -j 20 "src/microarrayAnalysis/enrichr.py --input {} --output results/CEMiTool_joined/enrichment/enrichr/{/.}.tsv $genesets" ::: tmp/modules/*.txt
-#
-#echo "Preparing input for FGSEA ..."
-#parallel "src/annotateCEMiTool_input.R {} data/processed/CEMiTool_FGSEA_input/ Symbol" ::: data/processed/collapsed/GSE*.tsv
-#
-#echo "Running FGSEA ..."
-#parallel -j 10 "src/microarrayAnalysis/fgsea.R --expression {} --es results/CEMiTool_joined/fgsea/ES_{/} --nes results/CEMiTool_joined/fgsea/NES_{/} --pval results/CEMiTool_joined/fgsea/p_value_{/} --gmt results/CEMiTool_joined_modules.gmt --sample-annotation config/sample_annotation/{/} --annotation-cols Symbol --symbols Symbol --sample-name-col Sample_geo_accession --class-col Class" ::: data/processed/CEMiTool_FGSEA_input/annotated/GSE*.tsv
+echo  "Joining cemitool results ..."
+module_tables=$(find "results/CEMiTool/" -name "module.tsv")
+names=$(echo $module_tables | sed "s/\S*\(GSE[0-9]\+\)\S*/--names=\1/g")
+input=$(echo $module_tables | sed "s/\(\S\+\)/--input=\1/g")
+src/microarrayAnalysis/join_cemitool.R $input $names --output results/CEMiTool_joined.tsv
+
+echo "Getting connected components in joined cemitool results ..."
+src/microarrayAnalysis/get_modules.py --input results/CEMiTool_joined.tsv --from-col Gene1 --to-col Gene2 --filter-col Sum --filter-val 3 --output results/CEMiTool_joined_modules.txt
+
+echo "Generating a GMT file based on connected components ..."
+cat  results/CEMiTool_joined_modules.txt | awk '{ print "Mod"NR"\t\t"$0 }' > results/CEMiTool_joined_modules.gmt
+
+echo "Putting each module in one file ..."
+parallel 'echo {} | tr "\t" "\n" > tmp/modules/mod{#}.txt' :::: results/CEMiTool_joined_modules.txt
+
+echo "Converting ensembl ids to hgnc symbol ..."
+parallel "src/microarrayAnalysis/ensembl2symbol.R --input {} --output tmp/modules_biomart/{/.}.tsv --is-list" ::: tmp/modules/*.txt
+
+echo "Extracting Gene Symbols ..."
+parallel "csvcut -t -c hgnc_symbol {} | sed 1d > tmp/modules_symbols/{/.}.txt" ::: tmp/modules_biomart/*.tsv
+
+echo "Running do_ora for the BTMs ..."
+parallel -j 20 "src/microarrayAnalysis/do_ora.R results/CEMiTool_joined/enrichment/do_ora/BTM_{/.}.tsv --genes {} --gmt config/pathways/BTM.gmt" ::: tmp/modules_symbols/*.txt
+
+echo "Getting all genesets in enrichr ..."
+genesets=$(cat config/libraries_enrichr.txt | sed "s/^/--gs=/" | tr "\n" " ")
+
+echo "Running enrichr ..."
+parallel -j 20 "src/microarrayAnalysis/enrichr.py --input {} --output results/CEMiTool_joined/enrichment/enrichr/{/.}.tsv $genesets" ::: tmp/modules_symbols/*.txt
+
+
+echo "Comparisons to GSEA input ..."
+parallel -j 10 "src/microarrayAnalysis/comparisons2gseainput.R --dontconvert --input {} --output tmp/fgsea/Log2FC/{/} "  ::: results/DEG/*.tsv
+
+echo "Running FGSEA ..."
+parallel --progress -j 10 "src/microarrayAnalysis/fgsea.R --input {} --output results/CEMiTool_joined/fgsea/{/} --gmt results/CEMiTool_joined_modules.gmt --symbols Symbol" ::: tmp/fgsea/Log2FC/*.tsv
+parallel --progress -j 10 "src/microarrayAnalysis/corrplot_fgsea.R {} figures/enrichment_cemitool_modules/fgsea/{/.}.pdf" ::: results/CEMiTool_joined/fgsea/*.tsv
 #
 echo "CEMiTool.sh Done."
