@@ -56,8 +56,10 @@ print_corrplot <- function(gsea_results, corr_colors, nes_suffix, pval_suffix, p
 	# remove not significant rows
 	rows_to_remove <- which(rowSums(pvs < pv_cut) == 0)
 
-	pvs <- pvs[-rows_to_remove, ]
-	nes <- nes[-rows_to_remove, ]
+    if(length(rows_to_remove) > 0){
+        pvs <- pvs[-rows_to_remove, ]
+        nes <- nes[-rows_to_remove, ]
+    }
 
 	# set to 0 the nes if p is not significant
 	nes[which(pvs > pv_cut, arr.ind = T)] <- 0
