@@ -45,7 +45,7 @@ get_mat <- function(tib, suffix, pathway_col){
 	return(res)
 }
 
-print_corrplot <- function(gsea_results, corr_colors, nes_suffix, pval_suffix, pathway_col, pv_cut, out_fname){
+print_corrplot <- function(gsea_results, corr_colors, nes_suffix, pval_suffix, pathway_col, pv_cut, out_fname, lim){
 
 	nes <- get_mat(gsea_results, nes_suffix, pathway_col)
 	pvs <- get_mat(gsea_results, pval_suffix, pathway_col)
@@ -74,12 +74,19 @@ print_corrplot <- function(gsea_results, corr_colors, nes_suffix, pval_suffix, p
 	# define cl.ratio
 	clr <- (-0.07*height + 4.89)/44
 
+    message("Range: ", paste0(round(range(nes), digits=3), collapse=", "))
+
+    if(!missing(lim)){
+        message("Setting limits.")
+        nes[which(nes > lim[2], arr.ind=T)] <- lim[2]
+        nes[which(nes < lim[1], arr.ind=T)] <- lim[1]
+    }
 
 	pdf(out_fname, height=height)
 	corrplot(nes, 
 			 col=corr_colors, is.corr=FALSE, addgrid.col="white", insig="blank",
 			 pch.cex=0.5, pch.col="black", tl.col="black", tl.cex=0.5, cl.cex=0.4, cl.ratio=clr,
-			 cl.pos="b", cl.align.text="l", mar=c(0,0,0,0), cl.lim=c(-4,4),
+			 cl.pos="b", cl.align.text="l", mar=c(0,0,0,0), cl.lim=lim,
 			 )
 	dev.off()
 }
@@ -107,5 +114,8 @@ if (!interactive() && !exists('SOURCE')) {
 	corr_colors <- c("#053061", "#2166AC", "#4393C3", "#92C5DE", "#D1E5F0",
 					"#FFFFFF", "#FDDBC7", "#F4A582", "#D6604D", "#B2182B", "#67001F")
 
-	print_corrplot(gsea_results, corr_colors, arg$nes_suffix, arg$pval_suffix, arg$pathway_col, as.numeric(arg$pv_cut), arg$output)
+    lim <- as.numeric(arg[["lim"]])
+    lim <- c(-lim, lim)
+
+	print_corrplot(gsea_results, corr_colors, arg$nes_suffix, arg$pval_suffix, arg$pathway_col, as.numeric(arg$pv_cut), arg$output, lim)
 }
