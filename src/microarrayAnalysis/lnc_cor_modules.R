@@ -46,8 +46,8 @@ output_ps_fname <- "results/CEMiTool_joined/corr_pvalue_lnc/GSE43777.tsv"
 output_padj_fname <- "results/CEMiTool_joined/corr_padj_lnc/GSE43777.tsv"
 output_stats_fname <- "results/CEMiTool_joined/corr_stats_lnc/GSE43777.tsv"
 cutoff_cor <- 0.8
-cutoff_p <- 1
-cutoff_p_adj <- 1
+cutoff_p <- 0.05
+cutoff_p_adj <- 0.1
 
 annotation_cols <- c(annotation_cols, ensembl_col)
 
@@ -100,8 +100,8 @@ write.table(ps, output_padj_fname, sep="\t", col.names=NA, row.names=T, quote=FA
 list_res <- list()
 
 cor_bool <- abs(cor_lnc_mod) > cutoff_cor
-p_bool <- ps > cutoff_p
-padj_bool <- adj_ps > cutoff_p_adj
+p_bool <- ps < cutoff_p
+padj_bool <- adj_ps < cutoff_p_adj
 cor_above_cutoff <- cor_bool & p_bool & padj_bool
 for(mod in names(modules)){
     mod_genes <- modules[[mod]]
