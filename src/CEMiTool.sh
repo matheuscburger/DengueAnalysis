@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #for cdir in results/CEMiTool data/processed/CEMiTool_input/annotated data/processed/CEMiTool_input/gene_conversion data/processed/CEMiTool_input/filtered data/processed/CEMiTool_FGSEA_input/gene_conversion data/processed/CEMiTool_FGSEA_input/annotated tmp/modules results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/enrichment/do_ora results/CEMiTool_joined/fgsea/ tmp/with_symbols; do
-for cdir in results/CEMiTool tmp/modules tmp/modules_biomart/ results/CEMiTool_joined/enrichment/do_ora/ results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/fgsea figures/enrichment_cemitool_modules/fgsea/ results/CEMiTool_joined/correlation_lnc/ results/CEMiTool_joined/correlation_stats_lnc/; do
+for cdir in results/CEMiTool tmp/modules tmp/modules_biomart/ results/CEMiTool_joined/enrichment/do_ora/ results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/fgsea figures/enrichment_cemitool_modules/fgsea/ results/CEMiTool_joined/corr_lnc/ results/CEMiTool_joined/corr_stats_lnc/ results/CEMiTool_joined/corr_pvalue_lnc/ results/CEMiTool_joined/corr_padj_lnc/; do
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
@@ -53,5 +53,8 @@ done
 #echo "Running FGSEA ..."
 #parallel --progress -j 10 "src/microarrayAnalysis/fgsea.R --input {} --output results/CEMiTool_joined/fgsea/{/} --gmt results/CEMiTool_joined_modules.gmt --symbols Symbol" ::: tmp/fgsea/Log2FC/*.tsv
 parallel --progress -j 10 "src/microarrayAnalysis/corrplot_fgsea.R {} figures/enrichment_cemitool_modules/fgsea/{/.}.pdf" ::: results/CEMiTool_joined/fgsea/*.tsv
+
+echo "Correlation between lncRNAs and genes in modules ..."
+parallel -j 10 "src/microarrayAnalysis/lnc_cor_modules.R --modules results/CEMiTool_joined_modules.gmt --expression={} --gencode config/reannotation/gencode_annotation.tsv --biotype config/reannotation/biotypes.tsv --output-corr=results/CEMiTool_joined/corr_lnc/{/} --output-pvalue=results/CEMiTool_joined/corr_pvalue_lnc/{/} --output-padj=results/CEMiTool_joined/corr_padj_lnc/{/} --output-stats=results/CEMiTool_joined/corr_stats_lnc/{/}" ::: data/processed/collapsed/GSE*.tsv
 #
 echo "CEMiTool.sh Done."
