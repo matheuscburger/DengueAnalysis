@@ -2,12 +2,12 @@
 
 "join_lnc_cor_modules.R
 
-Usage: join_lnc_cor_modules.R --input=<file>... --output=<file> [--join-by=<value>... --genes-suffix=<value> --n-correlated-col=<value> ] 
+Usage: join_lnc_cor_modules.R --output=<file> [--join-by=<value>... --genes-suffix=<value> --n-correlated-col=<value>] INPUT...
 
 Options:
   -h --help                    show this help message
   --version                    show program version
-  --input=<file>               input file names
+  INPUT                        input file names
   --output=<file>              output file name
   --n-correlated-col=<value>   Column containing the number of genes correlated. [default: N_Correlated]
   --join-by=<value>            Columns to use in merge process. [default: lncRNA, module]
