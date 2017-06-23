@@ -2,7 +2,7 @@
 
 "Calculate correlation between lncRNAs and genes in modules from CEMiTool
 
-Usage: lnc_cor_modules.R --modules=<file> --expression=<file> --gencode=<file> --biotype=<file> --output-corr=<file> --output-pvalue=<file> --output-padj=<file> --output-stats=<file> [--cutoff-cor=<value> --cutoff-pvalue=<value> --cutoff-padj=<value> --ensembl-col=<value> --annotation-cols=<value>...]
+Usage: lnc_cor_modules.R --modules=<file> --expression=<file> --gencode=<file> --biotype=<file> --output-corr=<file> --output-pvalue=<file> --output-padj=<file> --output-stats=<file> [--cutoff-cor=<value> --cutoff-pvalue=<value> --cutoff-padj=<value> --ensembl-col=<value> --dont-add-others-lncs --annotation-cols=<value>...]
 
 Options:
   -h --help                   show this help message
@@ -15,11 +15,12 @@ Options:
   --output-pvalue=<file>      output file to write p-values calculated from correlation values
   --output-padj=<file>        output file to write adjusted p-values
   --output-stats=<file>       output file to write results
-  --cutoff-cor=<value>        correlation cutoff [default: 0.7]
+  --cutoff-cor=<value>        correlation cutoff [default: 0.6]
   --cutoff-pvalue=<value>     p-value cutoff [default: 0.05]
   --cutoff-padj=<value>       adjusted p-value [default: 0.1]
   --ensembl-col=<value>       column containing ENSEMBL ID [default: Symbol]
   --annotation-cols=<value>   annotation columns
+  --dont-add-others-lncs      do not add lncRNAs that are no present in gencode file
 
 Authors:
   Matheus Carvalho Burger - burger at usp.br
@@ -84,6 +85,8 @@ if (!interactive()) {
     cutoff_p <- as.numeric(parameters[["cutoff_pvalue"]])
     cutoff_p_adj <- as.numeric(parameters[["cutoff_padj"]])
     annotation_cols <- c(annotation_cols, ensembl_col)
+    dont_add_others_lncs <- parameters[["dont_add_others_lncs"]]
+
 
     library("readr")
     library("dplyr")
@@ -104,8 +107,19 @@ if (!interactive()) {
     # get gene expression
     message("Reading gene expression table ...")
     exp_tib <- read_tsv(exp_fname)
-    exp_mat <- exp_tib %>% select_(paste0("-", annotation_cols)) %>% as.matrix(.)
+    exp_mat <- exp_tib %>% 
+        select_(paste0("-", annotation_cols)) %>%  # remove annotation cols and get only numbers
+        as.matrix(.)
     rownames(exp_mat) <- exp_tib[[ensembl_col]]
+
+    if(!dont_add_others_lncs){
+        message("Adding lncRNAs not present in gencode file ...")
+        possible_lnc <- rownames(exp_mat)[grep("ENSG", rownames(exp_mat), invert=T)]
+        real_lnc <- possible_lnc[!possible_lnc %in% c(unlist(group2gene), "unannotated")]
+        group2gene[["lnoncoding"]] <- c(real_lnc, group2gene[["lnoncoding"]])
+    }
+
+
 
     # get modules
     message("Reading modules (gmt) file ...")
