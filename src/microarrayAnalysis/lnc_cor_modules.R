@@ -133,10 +133,13 @@ if (!interactive()) {
     message("Subseting genes expression matrix ...")
     genes_to_extract <- rownames(exp_mat)[which(rownames(exp_mat) %in% all_modules_genes)]
     mod_mat <- exp_mat[genes_to_extract, ]
+    all_modules_genes <- all_modules_genes[which(all_modules_genes %in% genes_to_extract)]
+    modules <- lapply(modules, function(x) x[which(x %in% all_modules_genes)])
     rm(genes_to_extract)
 
     # calculate mean expression of each module
     message("Calculating mean expression for each module ...")
+    save(list=ls(), file="aux.RData")
     module_mean <- lapply(modules, function(x) colMeans(mod_mat[x, ], na.rm=T)) %>%
         do.call(rbind, .)
 
