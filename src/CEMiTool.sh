@@ -22,10 +22,11 @@ input=$(echo $module_tables | sed "s/\(\S\+\)/--input=\1/g")
 src/microarrayAnalysis/join_cemitool.R $input $names --output results/CEMiTool_joined.tsv
 
 echo "Getting connected components in joined cemitool results ..."
-src/microarrayAnalysis/get_modules.py --input results/CEMiTool_joined.tsv --from-col Gene1 --to-col Gene2 --filter-col Sum --filter-val 3 --output results/CEMiTool_joined_modules.txt
+#src/microarrayAnalysis/get_modules.py --input results/CEMiTool_joined.tsv --from-col Gene1 --to-col Gene2 --filter-col Sum --filter-val 3 --output results/CEMiTool_joined_modules.txt
+src/microarrayAnalysis/get_modules_CEMiTool_joined.R --input results/CEMiTool_joined.tsv --tsv=results/CEMiTool_joined_modules.tsv --graphml=results/CEMiTool_joined_modules.graphml --gmt results/CEMiTool_joined_modules.gmt --chosen-method=fast_greedy --min-studies=1 --algorithms=fast_greedy --algorithms=label_prop --algorithms=leading_eigen --algorithms=louvain --algorithms=walktrap
 
-echo "Generating a GMT file based on connected components ..."
-cat  results/CEMiTool_joined_modules.txt | awk '{ print "Mod"NR"\t\t"$0 }' > results/CEMiTool_joined_modules.gmt
+#echo "Generating a GMT file based on connected components ..."
+#cat  results/CEMiTool_joined_modules.txt | awk '{ print "Mod"NR"\t\t"$0 }' > results/CEMiTool_joined_modules.gmt
 
 echo "Putting each module in one file ..."
 parallel 'echo {} | tr "\t" "\n" > tmp/modules/mod{#}.txt' :::: results/CEMiTool_joined_modules.txt
