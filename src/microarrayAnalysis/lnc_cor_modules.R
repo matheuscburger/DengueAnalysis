@@ -139,8 +139,7 @@ if (!interactive()) {
 
     # calculate mean expression of each module
     message("Calculating mean expression for each module ...")
-    save(list=ls(), file="aux.RData")
-    module_mean <- lapply(modules, function(x) colMeans(mod_mat[x, ], na.rm=T)) %>%
+    module_mean <- lapply(modules, function(x) colMeans(mod_mat[x, , drop=FALSE], na.rm=T)) %>%
         do.call(rbind, .)
 
     # extract lnoncoding from gene expression matrix
@@ -181,6 +180,10 @@ if (!interactive()) {
     for(mod in names(modules)){
         message("Processing ", mod, " ...")
         mod_genes <- modules[[mod]]
+
+        if(length(mod_genes) < 2){
+            next
+        }
         cor_above_cutoff_mod <- cor_above_cutoff[,mod_genes]
 
         # mean correlation with all genes in module
