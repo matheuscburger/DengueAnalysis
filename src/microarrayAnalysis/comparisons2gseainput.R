@@ -57,13 +57,14 @@ if (!interactive() && !exists('SOURCE')) {
 
 
     if (!arg[["dontconvert"]]){
+        message("Trying to convert Ensembl IDs to Symbols...")
         ensgs <- wide[[gene_column]]
 
         ensembl <- useMart("ENSEMBL_MART_ENSEMBL", dataset="hsapiens_gene_ensembl", host="ensembl.org")
-        gsymbols <- getBM(attributes=c("ensembl_gene_id", "hgnc_symbol"), filters="ensembl_gene_id",
+        gsymbols <- getBM(attributes=c("ensembl_gene_id", "external_gene_name"), filters="ensembl_gene_id",
                           values=ensgs, mart=ensembl)
 
-        wide %>% 
+        wide <- wide %>% 
             right_join(as_tibble(gsymbols), ., by=c('ensembl_gene_id'=gene_column)) %>% 
             dplyr::select(-ensembl_gene_id)
     }

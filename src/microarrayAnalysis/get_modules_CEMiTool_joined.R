@@ -57,7 +57,7 @@ if (!interactive() && !exists('SOURCE')) {
 
     in_tib <- read_tsv(input) %>%
         dplyr::filter(Sum >= min_studies) %>%
-        mutate(powered=Sum**2/3**2)
+        mutate(powered=(Sum**1)/(max(Sum)**1))
 
     g <- graph_from_data_frame(in_tib, directed=FALSE)
     edge_attr(g, "weight") <- E(g)$"powered"

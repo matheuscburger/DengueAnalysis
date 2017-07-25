@@ -44,8 +44,9 @@ if (!interactive() && !exists('SOURCE')) {
     #arg$ensembl_col <- "Symbol"
     #arg$attributes <- c("external_gene_name")
     #arg$output <- "comsymbols.tsv"
+    #arg$is_list <- FALSE
 
-    if("is_list" %in% names(arg)){
+    if("is_list" %in% names(arg) && arg[["is_list"]]){
         ensgs <- sort(unique(readLines(arg$input)))
     } else {
         in_df <- read_tsv(arg$input)

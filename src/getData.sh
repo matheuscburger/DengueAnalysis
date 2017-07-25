@@ -22,12 +22,12 @@ GetGEO() {
 }
 
 
-GetGEO GSE43777 GPL570
-GetGEO GSE51808 GPL13158
+GetGEO GSE43777 GPL570 
+GetGEO GSE51808 GPL13158 
 GetGEO GSE13052 GPL2700
 GetGEO GSE28405 GPL2700
 
-src/getDataGSE28405.py data/raw_data/GSE28405_detection_pval.tsv data/raw_data/GSE28405_signal.tsv data/raw_data/GSE28405_samplename2gsm.tsv 
-src/getDataGSE13052.py data/raw_data/GSE13052_detection_pval.tsv data/raw_data/GSE13052_signal.tsv data/raw_data/GSE13052_samplename2gsm.tsv
+src/getDataGSE28405.py data/raw_data/GSE28405_detection_pval.tsv data/raw_data/GSE28405_signal.tsv data/raw_data/GSE28405_samplename2gsm.tsv || { echo "Unable to extract data for GSE28405"; exit 1; }
+src/getDataGSE13052.py data/raw_data/GSE13052_detection_pval.tsv data/raw_data/GSE13052_signal.tsv data/raw_data/GSE13052_samplename2gsm.tsv || { echo "Unable to extract data for GSE13052"; exit 1; }
 
 echo "getData.sh Done."

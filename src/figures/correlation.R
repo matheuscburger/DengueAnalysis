@@ -11,6 +11,7 @@ library("extrafont")
 font_import(pattern="DejaVuSans*", prompt=FALSE)
 loadfonts(device="pdf")
 
+dir.create(file.path("figures", "correlation"))
 dir.create(file.path("figures", "correlation", "scatter_plots"))
 dir.create(file.path("figures", "correlation", "scatter_plots_ranks"))
 
