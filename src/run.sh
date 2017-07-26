@@ -25,26 +25,26 @@ if [ "$outliers" = Y ]; then
 fi
 
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) " Getting data ..."
-#src/getData.sh &> log/getdata/getData.log || { echo "Unable to get data"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) " Getting data ..."
+src/getData.sh &> log/getdata/getData.log || { echo "Unable to get data"; exit 1; }
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Preprocessing data ..."
-#src/preprocess.sh &> log/preprocess/preprocess.log || { echo "Unable to preprocess data"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) "Preprocessing data ..."
+src/preprocess.sh &> log/preprocess/preprocess.log || { echo "Unable to preprocess data"; exit 1; }
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Running differential expression analysis ..."
-#src/DEG.sh &> log/degs/DEG.log || { echo "Unable to get DEGs"; exit 1; } 
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running differential expression analysis ..."
+src/DEG.sh &> log/degs/DEG.log || { echo "Unable to get DEGs"; exit 1; } 
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Running over representation analysis ..."
-#src/enrichment.sh &> log/enrichment/enrichment.log || { echo "Unable to do ORA analysis"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running over representation analysis ..."
+src/enrichment.sh &> log/enrichment/enrichment.log || { echo "Unable to do ORA analysis"; exit 1; }
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Running gene set enrichment analysis ..."
-#src/gsea.sh &> log/gsea/gsea.log || { echo "Unable to run GSEA"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running gene set enrichment analysis ..."
+src/gsea.sh &> log/gsea/gsea.log || { echo "Unable to run GSEA"; exit 1; }
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Running correlation analysis ..."
-#src/corr.sh &> log/correlation/corr.log || { echo "Unable to run correlation analysis"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running correlation analysis ..."
+src/corr.sh &> log/correlation/corr.log || { echo "Unable to run correlation analysis"; exit 1; }
 
-#echo $(date +%d-%m-%Y:%H:%M:%S) "Running CEMiTool ..."
-#src/CEMiTool.sh &> log/cemitool/cemitool.log || { echo "Unable to run CEMiTool"; exit 1; }
+echo $(date +%d-%m-%Y:%H:%M:%S) "Running CEMiTool ..."
+src/CEMiTool.sh &> log/cemitool/cemitool.log || { echo "Unable to run CEMiTool"; exit 1; }
 
 echo $(date +%d-%m-%Y:%H:%M:%S) "Getting figures ..."
 for script in src/figures/*; do 

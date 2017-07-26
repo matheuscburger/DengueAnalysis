@@ -92,6 +92,10 @@ if (!interactive() && !exists('SOURCE')) {
 
 	## RUN
 	in_df <- read_tsv(arg$input)
+    if(nrow(in_df) == 0){
+        warning("Input is empty")
+        quit(save="no", status=0, runLast=FALSE)
+    }
 	if(!is.null(arg$title)){
 		in_df[, "GeneSet"] <- arg$title
 		arg$database_col <- "GeneSet"
