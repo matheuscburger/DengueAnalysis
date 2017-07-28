@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for cdir in results/CEMiTool tmp/modules tmp/modules_biomart/ results/CEMiTool_joined/enrichment/do_ora/ results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/fgsea figures/enrichment_cemitool_modules/fgsea/ results/CEMiTool_joined/corr_lnc/ results/CEMiTool_joined/corr_stats_lnc/ results/CEMiTool_joined/corr_pvalue_lnc/ results/CEMiTool_joined/corr_padj_lnc/; do
+for cdir in results/CEMiTool tmp/modules_symbols tmp/modules tmp/modules_biomart/ results/CEMiTool_joined/enrichment/do_ora/ results/CEMiTool_joined/enrichment/enrichr results/CEMiTool_joined/fgsea figures/enrichment_cemitool_modules/fgsea/ results/CEMiTool_joined/corr_lnc/ results/CEMiTool_joined/corr_stats_lnc/ results/CEMiTool_joined/corr_pvalue_lnc/ results/CEMiTool_joined/corr_padj_lnc/ results/graphs/; do
 	echo "Creating $cdir ..."
 	if [ -d $cdir ]; then
 		echo "$cdir already exists !"
@@ -31,7 +31,8 @@ docker run -ti --rm -e DISPLAY=$DISPLAY -v `pwd`:`pwd` -w `pwd` -v /tmp/.X11-uni
 #cat  results/CEMiTool_joined_modules.txt | awk '{ print "Mod"NR"\t\t"$0 }' > results/CEMiTool_joined_modules.gmt
 
 echo "Putting each module in one file ..."
-parallel 'echo {} | tr "\t" "\n" > tmp/modules/mod{#}.txt' :::: results/CEMiTool_joined_modules.txt || { echo "Unable to extract modules"; exit 1; }
+#parallel 'echo {} | tr "\t" "\n" > tmp/modules/mod{#}.txt' :::: results/CEMiTool_joined_modules.txt || { echo "Unable to extract modules"; exit 1; }
+cat results/CEMiTool_joined_modules.gmt | awk '{for (i=3; i <= NF; i++) print $i > "tmp/modules/"$1".txt"}'
 
 echo "Converting ensembl ids to hgnc symbol ..."
 parallel "src/microarrayAnalysis/ensembl2symbol.R --input {} --output tmp/modules_biomart/{/.}.tsv --is-list" ::: tmp/modules/*.txt || { echo "Unable to get symbols"; exit 1; }
