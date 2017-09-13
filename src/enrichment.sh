@@ -36,7 +36,7 @@ parallel "sort {} | uniq > results/joined_degs/genes/{/}" ::: tmp/joined_degs/*.
 for database in config/pathways/*.gmt; do
     db=$(basename $database .gmt)
 	echo "Running do_ora for the BTMs ..."
-	parallel -j 20 "src/microarrayAnalysis/do_ora.R results/enrichment/do_ora/$db/{/.}.tsv --genes {} --gmt config/pathways/BTM.gmt" ::: results/joined_degs/genes/*.txt || { echo "Unable to run ORA for $db"; exit 1; }
+	parallel -j 20 "src/microarrayAnalysis/do_ora.R results/enrichment/do_ora/$db/{/.}.tsv --genes {} --gmt ${database}" ::: results/joined_degs/genes/*.txt || { echo "Unable to run ORA for $db"; exit 1; }
 done
 
 
